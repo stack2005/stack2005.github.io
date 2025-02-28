@@ -4,6 +4,31 @@
   
     
     <entry>
+      <title>Docker学习（一）：介绍及简单使用安装</title>
+      <link href="/posts/b4dcf402.html"/>
+      <url>/posts/b4dcf402.html</url>
+      
+        <content type="html"><![CDATA[<h2 id="Docker是什么？"><a href="#Docker是什么？" class="headerlink" title="Docker是什么？"></a>Docker是什么？</h2><p>引用官方的解释：</p><blockquote><p>Docker is an open platform for <strong>developing</strong>, <strong>shipping</strong>, and <strong>running applications</strong>. Docker enables you to separate your applications from your infrastructure so you can deliver software quickly. With Docker, you can manage your infrastructure in the same ways you manage your applications. By taking advantage of Docker’s methodologies for shipping, testing, and deploying code, you can significantly reduce the delay between writing code and running it in production.</p></blockquote><p><strong>Docker 属于 Linux 容器的一种封装，提供简单易用的容器使用接口。</strong>它是目前最流行的 Linux 容器解决方案。</p><p>Docker 将应用程序与该程序的依赖，打包在一个文件里面。运行这个文件，就会生成一个虚拟容器。程序在这个虚拟容器里运行，就好像在真实的物理机上运行一样。有了 Docker，就不用担心环境问题。</p><p>总体来说，Docker 的接口相当简单，用户可以方便地创建和使用容器，把自己的应用放入容器。容器还可以进行版本管理、复制、分享、修改，就像管理普通的代码一样。</p><p><strong>简单来说，Docker 是一个应用<u>打包、分发、部署</u>的工具。</strong></p><div class="note info simple"><p><strong>打包</strong>：就是把你软件运行所需的依赖、第三方库、软件打包到一起，变成一个安装包<br><strong>分发</strong>：你可以把你打包好的“安装包”上传到一个镜像仓库，其他人可以非常方便的获取和安装<br><strong>部署</strong>：拿着“安装包”就可以一个命令运行起来你的应用，自动模拟出一摸一样的运行环境，不管是在 Windows/Mac/Linux。</p></div><h2 id="Docker部署的优点"><a href="#Docker部署的优点" class="headerlink" title="Docker部署的优点"></a>Docker部署的优点</h2><p>常规应用开发部署方式：自己在 Windows 上开发、测试 —&gt; 到 Linux 服务器配置运行环境部署。</p><div class="note default flat"><p>问题：我机器上跑都没问题，怎么到服务器就各种问题了</p></div><p>用 Docker 开发部署流程：自己在 Windows 上开发、测试 —&gt; 打包为 Docker 镜像（可以理解为软件安装包） —&gt; 各种服务器上只需要一个命令部署好</p><div class="note success flat"><p>优点：确保了不同机器上跑都是一致的运行环境，不会出现我机器上跑正常，你机器跑就有问题的情况。</p></div><h2 id="Docker的用处"><a href="#Docker的用处" class="headerlink" title="Docker的用处"></a>Docker的用处</h2><ul><li>应用分发、部署，方便传播给他人安装。特别是开源软件和提供私有部署的应用</li><li>快速安装测试/学习软件，用完就丢（类似小程序），不把时间浪费在安装软件上。例如 Redis / MongoDB / ElasticSearch / ELK</li><li>多个版本软件共存，不污染系统，例如 Python2、Python3，Redis4.0，Redis5.0</li><li>Windows 上体验/学习各种 Linux 系统</li></ul><h2 id="Docker的安装"><a href="#Docker的安装" class="headerlink" title="Docker的安装"></a>Docker的安装</h2><p>笔者是Windows系统，采用的是wsl2安装Docker桌面版，推荐阅读Windows官方教程：<a href="https://learn.microsoft.com/zh-cn/windows/wsl/tutorials/wsl-containers">WSL 上的 Docker 容器入门 | Microsoft Learn</a></p><h2 id="镜像加速源"><a href="#镜像加速源" class="headerlink" title="镜像加速源"></a>镜像加速源</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">  &quot;builder&quot;: &#123;</span><br><span class="line">    &quot;gc&quot;: &#123;</span><br><span class="line">      &quot;defaultKeepStorage&quot;: &quot;20GB&quot;,</span><br><span class="line">      &quot;enabled&quot;: true</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;,</span><br><span class="line">  &quot;experimental&quot;: false,</span><br><span class="line">  &quot;registry-mirrors&quot;: [</span><br><span class="line">    &quot;https://registry.docker-cn.com&quot;,</span><br><span class="line">    &quot;https://mirror.ccs.tencentyun.com&quot;,</span><br><span class="line">    &quot;https://docker.mirrors.ustc.edu.cn&quot;</span><br><span class="line">  ]</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><h2 id="简单的开始"><a href="#简单的开始" class="headerlink" title="简单的开始"></a>简单的开始</h2><p>以下均以nginx为例，打开docker desktop，搜索nginx或者上<a href="https://hub.docker.com/">Docker Hub</a>搜索各种镜像</p><p><img src="https://bu.dusays.com/2025/02/28/67c1be0c49722.png" alt="image-20250228214532817"></p><p>点击查看官方文档，这里我们直接Run</p><div class="img-wrap"><div class="img-bg"><img class="img" src="https://bu.dusays.com/2025/02/28/67c1bf309a9db.png" alt="点击images，简单配置后开始运行容器"/></div><span class="image-caption">点击images，简单配置后开始运行容器</span></div><span class='p center'>点击运行的端口，可以看见运行成功</span><p><img src="https://bu.dusays.com/2025/02/28/67c1bfb903903.png" alt="image-20250228215242211"></p><h2 id="配合vscode修改容器中的文件"><a href="#配合vscode修改容器中的文件" class="headerlink" title="配合vscode修改容器中的文件"></a>配合vscode修改容器中的文件</h2><p>打开VScode安装Docker拓展，安装完毕可以看到左边侧栏多了一个可爱的小鲸鱼，点击，可以看见正在运行的nginx容器和拥有的镜像。</p><p><img src="https://bu.dusays.com/2025/02/28/67c1c168b6b88.png" alt="image-20250228215953851"></p><p>点击运行的容器，点击File，找到<code>usr\share\nginx\html\index.html</code>,修改内容，刷新一下页面，可以看见修改成功</p><p><img src="https://bu.dusays.com/2025/02/28/67c1c208981ed.png" alt="image-20250228220233837"></p>]]></content>
+      
+      
+      <categories>
+          
+          <category> 编程基础 </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> Docker </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>小站搭建过程：基于Hexo+Github Page</title>
       <link href="/posts/9d48c7ab.html"/>
       <url>/posts/9d48c7ab.html</url>
