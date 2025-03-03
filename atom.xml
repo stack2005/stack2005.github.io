@@ -17,6 +17,25 @@
   <generator uri="https://hexo.io/">Hexo</generator>
   
   <entry>
+    <title>Docker学习（三）：编写自己的镜像</title>
+    <link href="https://stack2005.github.io/posts/172281ba.html"/>
+    <id>https://stack2005.github.io/posts/172281ba.html</id>
+    <published>2025-03-02T16:00:00.000Z</published>
+    <updated>2025-03-02T16:00:00.000Z</updated>
+    
+    
+    <summary type="html">介绍DockerFile，学会创建自己的镜像</summary>
+    
+    
+    
+    <category term="编程基础" scheme="https://stack2005.github.io/categories/%E7%BC%96%E7%A8%8B%E5%9F%BA%E7%A1%80/"/>
+    
+    
+    <category term="Docker" scheme="https://stack2005.github.io/tags/Docker/"/>
+    
+  </entry>
+  
+  <entry>
     <title>文盲程序员：思考依赖性</title>
     <link href="https://stack2005.github.io/posts/d8e577bf.html"/>
     <id>https://stack2005.github.io/posts/d8e577bf.html</id>
