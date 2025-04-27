@@ -1,0 +1,399 @@
+<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0,viewport-fit=cover"><title>算法学习 | Stack's Blog</title><meta name="author" content="Stack,liuruiqi2005@yeah.net"><meta name="copyright" content="Stack"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta name="description" content="算法基础知识及相关题目">
+<meta property="og:type" content="article">
+<meta property="og:title" content="算法学习">
+<meta property="og:url" content="https://stack2005.github.io/posts/2633a26.html">
+<meta property="og:site_name" content="Stack&#39;s Blog">
+<meta property="og:description" content="算法基础知识及相关题目">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://bu.dusays.com/2025/03/03/67c58e7f686c7.jpg">
+<meta property="article:published_time" content="2025-03-15T16:00:00.000Z">
+<meta property="article:modified_time" content="2025-03-15T16:00:00.000Z">
+<meta property="article:author" content="Stack">
+<meta property="article:tag" content="算法">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://bu.dusays.com/2025/03/03/67c58e7f686c7.jpg"><script type="application/ld+json">{
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "headline": "算法学习",
+  "url": "https://stack2005.github.io/posts/2633a26.html",
+  "image": "https://bu.dusays.com/2025/03/03/67c58e7f686c7.jpg",
+  "datePublished": "2025-03-15T16:00:00.000Z",
+  "dateModified": "2025-03-15T16:00:00.000Z",
+  "author": [
+    {
+      "@type": "Person",
+      "name": "Stack",
+      "url": "https://stack2005.github.io/"
+    }
+  ]
+}</script><link rel="shortcut icon" href="/img/favicon.png"><link rel="canonical" href="https://stack2005.github.io/posts/2633a26.html"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><link rel="manifest" href="/manifest.json"/><meta name="msapplication-TileColor" content="#3b70fc"/><link rel="apple-touch-icon" sizes="180x180" href="/img/siteicon/128.png"/><link rel="icon" type="image/png" sizes="32x32" href="/img/siteicon/32.png"/><link rel="icon" type="image/png" sizes="16x16" href="/img/siteicon/16.png"/><link rel="mask-icon" href="/img/siteicon/128.png" color="#5bbad5"/><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/css/all.min.css"><script>
+    (() => {
+      
+    const saveToLocal = {
+      set: (key, value, ttl) => {
+        if (!ttl) return
+        const expiry = Date.now() + ttl * 86400000
+        localStorage.setItem(key, JSON.stringify({ value, expiry }))
+      },
+      get: key => {
+        const itemStr = localStorage.getItem(key)
+        if (!itemStr) return undefined
+        const { value, expiry } = JSON.parse(itemStr)
+        if (Date.now() > expiry) {
+          localStorage.removeItem(key)
+          return undefined
+        }
+        return value
+      }
+    }
+
+    window.btf = {
+      saveToLocal,
+      getScript: (url, attr = {}) => new Promise((resolve, reject) => {
+        const script = document.createElement('script')
+        script.src = url
+        script.async = true
+        Object.entries(attr).forEach(([key, val]) => script.setAttribute(key, val))
+        script.onload = script.onreadystatechange = () => {
+          if (!script.readyState || /loaded|complete/.test(script.readyState)) resolve()
+        }
+        script.onerror = reject
+        document.head.appendChild(script)
+      }),
+      getCSS: (url, id) => new Promise((resolve, reject) => {
+        const link = document.createElement('link')
+        link.rel = 'stylesheet'
+        link.href = url
+        if (id) link.id = id
+        link.onload = link.onreadystatechange = () => {
+          if (!link.readyState || /loaded|complete/.test(link.readyState)) resolve()
+        }
+        link.onerror = reject
+        document.head.appendChild(link)
+      }),
+      addGlobalFn: (key, fn, name = false, parent = window) => {
+        if (!false && key.startsWith('pjax')) return
+        const globalFn = parent.globalFn || {}
+        globalFn[key] = globalFn[key] || {}
+        globalFn[key][name || Object.keys(globalFn[key]).length] = fn
+        parent.globalFn = globalFn
+      }
+    }
+  
+      
+      const activateDarkMode = () => {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+        }
+      }
+      const activateLightMode = () => {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff')
+        }
+      }
+
+      btf.activateDarkMode = activateDarkMode
+      btf.activateLightMode = activateLightMode
+
+      const theme = saveToLocal.get('theme')
+    
+          theme === 'dark' ? activateDarkMode() : theme === 'light' ? activateLightMode() : null
+        
+      
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        document.documentElement.classList.toggle('hide-aside', asideStatus === 'hide')
+      }
+    
+      
+    const detectApple = () => {
+      if (/iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)) {
+        document.documentElement.classList.add('apple')
+      }
+    }
+    detectApple()
+  
+    })()
+  </script><script>const GLOBAL_CONFIG = {
+  root: '/',
+  algolia: undefined,
+  localSearch: {"path":"/search.xml","preload":true,"top_n_per_article":1,"unescape":false,"languages":{"hits_empty":"未找到符合您查询的内容：${query}","hits_stats":"共找到 ${hits} 篇文章"}},
+  translate: {"defaultEncoding":2,"translateDelay":0,"msgToTraditionalChinese":"繁","msgToSimplifiedChinese":"簡"},
+  highlight: {"plugin":"highlight.js","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":false,"highlightFullpage":false,"highlightMacStyle":true},
+  copy: {
+    success: '复制成功',
+    error: '复制失败',
+    noSupport: '浏览器不支持'
+  },
+  relativeDate: {
+    homepage: false,
+    post: false
+  },
+  runtime: '',
+  dateSuffix: {
+    just: '刚刚',
+    min: '分钟前',
+    hour: '小时前',
+    day: '天前',
+    month: '个月前'
+  },
+  copyright: undefined,
+  lightbox: 'medium_zoom',
+  Snackbar: undefined,
+  infinitegrid: {
+    js: 'https://cdn.jsdelivr.net/npm/@egjs/infinitegrid/dist/infinitegrid.min.js',
+    buttonText: '加载更多'
+  },
+  isPhotoFigcaption: false,
+  islazyloadPlugin: false,
+  isAnchor: false,
+  percent: {
+    toc: true,
+    rightside: false,
+  },
+  autoDarkmode: false
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  title: '算法学习',
+  isHighlightShrink: true,
+  isToc: true,
+  pageType: 'post'
+}</script><link rel="stylesheet" href="/css/custom.css" media="defer" onload="this.media='all'"><link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/zhheo/JS-Heo@main/tag-link/tag-link.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/zhheo/JS-Heo@master/mainColor/heoMainColor.css"><!-- hexo injector head_end start --><link rel="stylesheet" href="https://cdn.cbd.int/hexo-butterfly-categories-card@1.0.0/lib/categorybar.css"><link rel="stylesheet" href="https://npm.elemecdn.com/anzhiyu-blog@2.0.4/css/runtime/runtime.min.css" media="print" onload="this.media='all'"><link rel="stylesheet" href="https://cdn.cbd.int/hexo-butterfly-tag-plugins-plus@latest/lib/assets/font-awesome-animation.min.css" media="defer" onload="this.media='all'"><link rel="stylesheet" href="https://cdn.cbd.int/hexo-butterfly-tag-plugins-plus@latest/lib/tag_plugins.css" media="defer" onload="this.media='all'"><script src="https://cdn.cbd.int/hexo-butterfly-tag-plugins-plus@latest/lib/assets/carousel-touch.js"></script><link rel="stylesheet" href="https://cdn.cbd.int/hexo-butterfly-wowjs/lib/animate.min.css" media="print" onload="this.media='screen'"><!-- hexo injector head_end end --><meta name="generator" content="Hexo 7.3.0"><link rel="alternate" href="/atom.xml" title="Stack's Blog" type="application/atom+xml">
+</head><body><div id="web_bg" style="background-image: url(https://bu.dusays.com/2025/02/28/67c1a8671cb66.jpg);"></div><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img text-center"><img src="https://bu.dusays.com/2025/02/28/67c1a8c0f366f.jpg" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="site-data text-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">18</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">12</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">6</div></a></div><div class="menus_items"><div class="menus_item"><a class="site-page faa-parent animated-hover" href="/"><i class="fa-fw fas fa-home faa-tada"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page faa-parent animated-hover" href="/shuoshuo/"><i class="fa-fw fas fa-comment-dots faa-tada"></i><span> 闲言碎语</span></a></div><div class="menus_item"><a class="site-page faa-parent animated-hover" href="/gallery/"><i class="fa-fw fas fa-images faa-tada"></i><span> gallery</span></a></div><div class="menus_item"><a class="site-page faa-parent animated-hover" href="javascript:void(0);"><i class="fa-fw fas fa-list faa-tada"></i><span> List</span><i class="fas fa-chevron-down expand"></i></a><ul class="menus_item_child"><li><a class="site-page child faa-parent animated-hover" href="/archives/"><i class="fa-fw fas fa-archive faa-tada"></i><span> 时间轴</span></a></li><li><a class="site-page child faa-parent animated-hover" href="/tags/"><i class="fa-fw fas fa-tags faa-tada"></i><span> 标签</span></a></li><li><a class="site-page child faa-parent animated-hover" href="/categories/"><i class="fa-fw fas fa-folder-open faa-tada"></i><span> 分类</span></a></li></ul></div><div class="menus_item"><a class="site-page faa-parent animated-hover" href="/comments/"><i class="fa-fw fas fa-envelope faa-tada"></i><span> 留言板</span></a></div><div class="menus_item"><a class="site-page faa-parent animated-hover" href="/link/"><i class="fa-fw fas fa-link faa-tada"></i><span> 友人帐</span></a></div><div class="menus_item"><a class="site-page faa-parent animated-hover" href="/bangumis/"><svg class="icon faa-tada" aria-hidden="true"><use xlink:href="#icon-bilibili1"></use></svg><span> 追番</span></a></div><div class="menus_item"><a class="site-page faa-parent animated-hover" href="/about/"><svg class="icon faa-tada" aria-hidden="true"><use xlink:href="#icon-zhifeiji"></use></svg><span> 关于</span></a></div></div></div></div><div class="post" id="body-wrap"><header class="post-bg" id="page-header" style="background-image: url(https://bu.dusays.com/2025/03/03/67c58e7f686c7.jpg);"><nav id="nav"><span id="blog-info"><a class="nav-site-title" href="/"><span class="site-name">Stack's Blog</span></a><a class="nav-page-title" href="/"><span class="site-name">算法学习</span></a></span><div id="menus"><div id="search-button"><span class="site-page social-icon search"><i class="fas fa-search fa-fw"></i><span> 搜索</span></span></div><div class="menus_items"><div class="menus_item"><a class="site-page faa-parent animated-hover" href="/"><i class="fa-fw fas fa-home faa-tada"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page faa-parent animated-hover" href="/shuoshuo/"><i class="fa-fw fas fa-comment-dots faa-tada"></i><span> 闲言碎语</span></a></div><div class="menus_item"><a class="site-page faa-parent animated-hover" href="/gallery/"><i class="fa-fw fas fa-images faa-tada"></i><span> gallery</span></a></div><div class="menus_item"><a class="site-page faa-parent animated-hover" href="javascript:void(0);"><i class="fa-fw fas fa-list faa-tada"></i><span> List</span><i class="fas fa-chevron-down expand"></i></a><ul class="menus_item_child"><li><a class="site-page child faa-parent animated-hover" href="/archives/"><i class="fa-fw fas fa-archive faa-tada"></i><span> 时间轴</span></a></li><li><a class="site-page child faa-parent animated-hover" href="/tags/"><i class="fa-fw fas fa-tags faa-tada"></i><span> 标签</span></a></li><li><a class="site-page child faa-parent animated-hover" href="/categories/"><i class="fa-fw fas fa-folder-open faa-tada"></i><span> 分类</span></a></li></ul></div><div class="menus_item"><a class="site-page faa-parent animated-hover" href="/comments/"><i class="fa-fw fas fa-envelope faa-tada"></i><span> 留言板</span></a></div><div class="menus_item"><a class="site-page faa-parent animated-hover" href="/link/"><i class="fa-fw fas fa-link faa-tada"></i><span> 友人帐</span></a></div><div class="menus_item"><a class="site-page faa-parent animated-hover" href="/bangumis/"><svg class="icon faa-tada" aria-hidden="true"><use xlink:href="#icon-bilibili1"></use></svg><span> 追番</span></a></div><div class="menus_item"><a class="site-page faa-parent animated-hover" href="/about/"><svg class="icon faa-tada" aria-hidden="true"><use xlink:href="#icon-zhifeiji"></use></svg><span> 关于</span></a></div></div><div id="toggle-menu"><span class="site-page"><i class="fas fa-bars fa-fw"></i></span></div></div></nav><div id="post-info"><h1 class="post-title">算法学习</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">发表于</span><time class="post-meta-date-created" datetime="2025-03-15T16:00:00.000Z" title="发表于 2025-03-16 00:00:00">2025-03-16</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2025-03-15T16:00:00.000Z" title="更新于 2025-03-16 00:00:00">2025-03-16</time></span><span class="post-meta-categories"><span class="post-meta-separator">|</span><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/categories/%E7%AE%97%E6%B3%95/">算法</a></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-pv-cv" id="" data-flag-title=""><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">浏览量:</span><span id="busuanzi_value_page_pv"><i class="fa-solid fa-spinner fa-spin"></i></span></span></div></div></div></header><main class="layout" id="content-inner"><div id="post"><article class="container post-content" id="article-container"><div id="post-outdate-notice" data="{&quot;limitDay&quot;:365,&quot;messagePrev&quot;:&quot;It has been&quot;,&quot;messageNext&quot;:&quot;days since the last update, the content of the article may be outdated.&quot;,&quot;postUpdate&quot;:&quot;2025-03-16 00:00:00&quot;}" hidden></div><h2 id="位运算"><a href="#位运算" class="headerlink" title="位运算"></a>位运算</h2><h3 id="基础知识"><a href="#基础知识" class="headerlink" title="基础知识"></a>基础知识</h3><h4 id="概览"><a href="#概览" class="headerlink" title="概览"></a>概览</h4><div class="table-container">
+<table>
+<thead>
+<tr>
+<th>符号</th>
+<th>描述</th>
+<th>运算规则</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>&amp;</td>
+<td>与</td>
+<td>两个位都为1时，结果才为1</td>
+</tr>
+<tr>
+<td>\</td>
+<td></td>
+<td>或</td>
+<td>两个位都为0时，结果才为0</td>
+</tr>
+<tr>
+<td>^</td>
+<td>异或</td>
+<td>两个位相同为0，相异为1</td>
+</tr>
+<tr>
+<td>~</td>
+<td>取反</td>
+<td>0变1，1变0</td>
+</tr>
+<tr>
+<td>&lt;&lt;</td>
+<td>左移</td>
+<td>各二进位全部左移若干位，高位丢弃，低位补0</td>
+</tr>
+<tr>
+<td>&gt;&gt;</td>
+<td>右移</td>
+<td>各二进位全部右移若干位，对无符号数，高位补0，有符号数，各编译器处理方法不一样，有的补符号位（算术右移），有的补0（逻辑右移）</td>
+</tr>
+</tbody>
+</table>
+</div>
+<h4 id="复合赋值运算符"><a href="#复合赋值运算符" class="headerlink" title="复合赋值运算符"></a>复合赋值运算符</h4><p>位运算符与赋值运算符结合，组成新的复合赋值运算符，它们是：</p>
+<ul>
+<li><code>&amp;=</code>例：<code>a &amp;= b</code> 相当于 <code>a = a &amp; b</code></li>
+<li><code>|=</code>例：<code>a |= b</code> 相当于 <code>a = a | b</code></li>
+<li><code>&gt;&gt;=</code>例：<code>a &gt;&gt;= b</code> 相当于 <code>a = a &gt;&gt; b</code></li>
+<li><code>&lt;&lt;=</code>例：<code>a &lt;&lt;= b</code> 相当于 <code>a = a &lt;&lt; b</code></li>
+<li><code>^=</code>例：<code>a ^= b</code> 相当于 <code>a = a ^ b</code></li>
+</ul>
+<h4 id="常用位操作小技巧"><a href="#常用位操作小技巧" class="headerlink" title="常用位操作小技巧"></a>常用位操作小技巧</h4><ol>
+<li><strong>清零</strong>：如果想将一个单元清零，只要与一个各位都为零的数值<strong>相与</strong>，结果为零。</li>
+<li><strong>取一个数的指定位</strong>：例如，取数 <code>X = 1010 1110</code> 的低4位，只需另找一个数 <code>Y = 0000 1111</code>，然后 <code>X &amp; Y = 0000 1110</code> 即可得到 <code>X</code> 的指定位。</li>
+<li><strong>判断奇偶</strong>：通过判断最未位是0还是1来决定奇偶，可以用 <code>if ((a &amp; 1) == 0)</code> 代替 <code>if (a % 2 == 0)</code> 来判断 <code>a</code> 是否为偶数。</li>
+<li><strong>设置某些位为1</strong>：例如，将数 <code>X = 1010 1110</code> 的低4位设置为1，只需另找一个数 <code>Y = 0000 1111</code>，然后 <code>X | Y = 1010 1111</code> 即可得到。</li>
+<li><strong>翻转指定位</strong>：例如，将数 <code>X = 1010 1110</code> 的低4位翻转，只需另找一个数 <code>Y = 0000 1111</code>，然后 <code>X ^ Y = 1010 0001</code> 即可得到。</li>
+<li><strong>与0相异或值不变</strong>：例如 <code>1010 1110 ^ 0000 0000 = 1010 1110</code></li>
+<li><strong>交换两个数</strong>：</li>
+</ol>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="type">void</span> <span class="title">Swap</span><span class="params">(<span class="type">int</span> &amp;a, <span class="type">int</span> &amp;b)</span> </span>&#123;</span><br><span class="line">	<span class="keyword">if</span> (a != b) &#123;</span><br><span class="line">    	a ^= b;</span><br><span class="line">    	b ^= a;</span><br><span class="line">    	a ^= b;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<div class="note info simple"><p><code>a=a^b</code></p>
+<p><code>b=b^(a^b)</code>  =&gt;  <code>b=(b^b)^a</code>  =&gt; <code>b=0^a=a</code> 达到了把a赋给b的效果</p>
+<p>由于前面二步可知a=(a^b)，b=a，第三步<code>a=a^b</code> =&gt; <code>a=(a^b)^a=b</code></p>
+</div>
+<ol>
+<li><strong>使一个数的最低位为零</strong>：例如，使 <code>a</code> 的最低位为0，可以表示为：<code>a &amp; ~1</code>。<code>~1</code> 的值为 <code>1111 1111 1111 1110</code>，再按”与”运算，最低位一定为0。</li>
+</ol>
+<h3 id="相关题目"><a href="#相关题目" class="headerlink" title="相关题目"></a>相关题目</h3><h4 id="颠倒二进制位"><a href="#颠倒二进制位" class="headerlink" title="颠倒二进制位"></a>颠倒二进制位</h4><p><img src="https://bu.dusays.com/2025/03/16/67d68a700a4da.png" alt="image-20250316162304509"></p>
+<h5 id="思路一：逐位替换"><a href="#思路一：逐位替换" class="headerlink" title="思路一：逐位替换"></a>思路一：逐位替换</h5><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span> &#123;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function"><span class="type">uint32_t</span> <span class="title">reverseBits</span><span class="params">(<span class="type">uint32_t</span> n)</span> </span>&#123;</span><br><span class="line">        <span class="type">uint32_t</span> res = <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">0</span>; i &lt; <span class="number">32</span>; ++i) &#123;</span><br><span class="line">            res = (res &lt;&lt; <span class="number">1</span>) | (n &amp; <span class="number">1</span>);</span><br><span class="line">            n &gt;&gt;= <span class="number">1</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> res;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+<div class="note info simple"><p><strong>左移操作 (res &lt;&lt; 1):</strong> 这个操作将res的二进制表示向左移动一位（在右边添0）。左移一位的效果相当于将res乘以2。在这个上下文中，它为下一步的或操作（|）腾出了一个位置（最低位）。</p>
+<p><strong>与操作 (n &amp; 1):</strong> 这个操作将n的二进制表示与1进行按位与操作。由于1的二进制表示只在最低位为1，其他位为0，这个操作的结果就是n的最低位。这样可以提取出n的当前最低位的值（0或1）。</p>
+<p><strong>或操作 (|):</strong> 这个操作将左移后的res与n的最低位进行按位或操作。由于左移操作已经为新的位腾出了空间，这一步实际上是将n的最低位添加到res的最低位。这样，n的原始最低位就成为了res的当前最高位。</p>
+</div>
+<h5 id="思路二：分治"><a href="#思路二：分治" class="headerlink" title="思路二：分治"></a>思路二：分治</h5><p>先来看一个前缀知识： <strong>高低位交换</strong></p>
+<p>给出一个16位的无符号整数。称这个二进制数的前8位为“高位”，后8位为“低位”。现在写一程序将它的高低位交换。例如，数34520用二进制表示为：</p>
+<p>   <code>10000110 11011000</code></p>
+<p>将它的高低位进行交换，我们得到了一个新的二进制数：</p>
+<p>  <code>11011000 10000110</code></p>
+<p>它即是十进制的55430。</p>
+<p>这个问题用位操作解决起来非常方便，设x=34520=10000110 11011000(二进制) 由于x为无符号数，右移时会执行逻辑右移即高位补0，因此x右移8位将得到<code>0000000010000110</code>。而x左移8位将得到<code>11011000 00000000</code>。可以发现只要将<code>x&gt;&gt;8</code>与<code>x&lt;&lt;8</code>这两个数相或就可以得到<code>11011000 10000110</code>。用代码实现非常简洁：</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">a = (a &gt;&gt; <span class="number">8</span>) | (a &lt;&lt; <span class="number">8</span>);  </span><br></pre></td></tr></table></figure>
+<p><strong>思路：</strong></p>
+<p>若要翻转一个二进制串，可以将其均分成左右两部分，对每部分递归执行翻转操作，然后将左半部分拼在右半部分的后面，即完成了翻转。</p>
+<p>由于左右两部分的计算方式是相似的，利用位掩码和位移运算，我们可以自底向上地完成这一分治流程。</p>
+<p><img src="https://assets.leetcode-cn.com/solution-static/190/190_fig1.png" alt="fig1"></p>
+<p>对于递归的最底层，我们需要交换所有奇偶位：</p>
+<p>取出所有奇数位和偶数位；<br>将奇数位移到偶数位上，偶数位移到奇数位上。<br>类似地，对于倒数第二层，每两位分一组，按组号取出所有奇数组和偶数组，然后将奇数组移到偶数组上，偶数组移到奇数组上。以此类推。</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span> &#123;</span><br><span class="line"><span class="keyword">private</span>:</span><br><span class="line">    <span class="type">const</span> <span class="type">uint32_t</span> M1 = <span class="number">0x55555555</span>; <span class="comment">// 01010101010101010101010101010101</span></span><br><span class="line">    <span class="type">const</span> <span class="type">uint32_t</span> M2 = <span class="number">0x33333333</span>; <span class="comment">// 00110011001100110011001100110011</span></span><br><span class="line">    <span class="type">const</span> <span class="type">uint32_t</span> M4 = <span class="number">0x0f0f0f0f</span>; <span class="comment">// 00001111000011110000111100001111</span></span><br><span class="line">    <span class="type">const</span> <span class="type">uint32_t</span> M8 = <span class="number">0x00ff00ff</span>; <span class="comment">// 00000000111111110000000011111111</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function"><span class="type">uint32_t</span> <span class="title">reverseBits</span><span class="params">(<span class="type">uint32_t</span> n)</span> </span>&#123;</span><br><span class="line">        n = n &gt;&gt; <span class="number">1</span> &amp; M1 | (n &amp; M1) &lt;&lt; <span class="number">1</span>;</span><br><span class="line">        n = n &gt;&gt; <span class="number">2</span> &amp; M2 | (n &amp; M2) &lt;&lt; <span class="number">2</span>;</span><br><span class="line">        n = n &gt;&gt; <span class="number">4</span> &amp; M4 | (n &amp; M4) &lt;&lt; <span class="number">4</span>;</span><br><span class="line">        n = n &gt;&gt; <span class="number">8</span> &amp; M8 | (n &amp; M8) &lt;&lt; <span class="number">8</span>;</span><br><span class="line">        <span class="keyword">return</span> n &gt;&gt; <span class="number">16</span> | n &lt;&lt; <span class="number">16</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<h2 id="分治"><a href="#分治" class="headerlink" title="分治"></a>分治</h2><h3 id="相关题目-1"><a href="#相关题目-1" class="headerlink" title="相关题目"></a>相关题目</h3><h4 id="最长的美好子字符串"><a href="#最长的美好子字符串" class="headerlink" title="最长的美好子字符串"></a>最长的美好子字符串</h4><p><img src="https://bu.dusays.com/2025/03/16/67d6a7487d677.png" alt="image-20250316182616253"></p>
+<p>题目要求找到最长的美好子字符串，如果字符串本身即合法的美好字符串，此时最长的完美字符串即为字符串本身。由于字符串中含有部分字符 ch 只出现大写或者小写形式，如果字符串包含这些字符 ch 时，可以判定该字符串肯定不为完美字符串。一个字符串为美好字符串的必要条件是不包含这些非法字符。因此我们可以利用分治的思想，将字符串从这些非法的字符处切分成若干段，则满足要求的最长子串一定出现在某个被切分的段内，而不能跨越一个或多个段。</p>
+<p>递归时，maxPos 用来记录最长完美字符串的起始索引，maxLen 用来记录最长完美字符串的长度。</p>
+<p>每次检查区间 [start,end] 中的子字符串是否为完美字符串，如果当前的字符串为合法的完美字符串，则将当前区间的字符串的长度与 maxLen 进行比较和替换；否则我们依次对当前字符串进行切分，然后递归检测切分后的字符串。</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span> &#123;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function">string <span class="title">longestNiceSubstring</span><span class="params">(string s)</span> </span>&#123;</span><br><span class="line">        <span class="type">int</span> maxPos = <span class="number">0</span>, maxlen = <span class="number">0</span>;</span><br><span class="line">        <span class="built_in">findLongestSubstring</span>(s,<span class="number">0</span>,s.<span class="built_in">size</span>()<span class="number">-1</span>,maxPos, maxlen);</span><br><span class="line">        <span class="keyword">return</span> s.<span class="built_in">substr</span>(maxPos, maxlen);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="type">void</span> <span class="title">findLongestSubstring</span><span class="params">(string s, <span class="type">int</span> start, <span class="type">int</span> end,<span class="type">int</span> &amp; maxPos, <span class="type">int</span> &amp; maxlen)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">if</span>(start &gt;= end) <span class="keyword">return</span>;</span><br><span class="line">		</span><br><span class="line">        <span class="comment">//判断是否为完美字符串</span></span><br><span class="line">        <span class="type">int</span> lower = <span class="number">0</span>, upper = <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">for</span>(<span class="type">int</span> i = start; i &lt;= end; i++) &#123;</span><br><span class="line">            <span class="keyword">if</span>(<span class="built_in">islower</span>(s[i])) &#123;</span><br><span class="line">                lower |= <span class="number">1</span> &lt;&lt; (s[i] - <span class="string">&#x27;a&#x27;</span>);</span><br><span class="line">            &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">                upper |= <span class="number">1</span> &lt;&lt; (s[i] - <span class="string">&#x27;A&#x27;</span>);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">		<span class="comment">//递归结束条件二：是完美字符串</span></span><br><span class="line">        <span class="keyword">if</span>(lower == upper) &#123;</span><br><span class="line">            <span class="keyword">if</span>(end - start + <span class="number">1</span> &gt; maxlen) &#123; <span class="comment">//更新</span></span><br><span class="line">                maxPos = start;</span><br><span class="line">                maxlen = end - start + <span class="number">1</span>;</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">return</span>;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="type">int</span> vaild = lower &amp; upper; <span class="comment">//新的掩码，来表示哪些字母已经出现过大写和小写</span></span><br><span class="line">        <span class="type">int</span> pos = start;</span><br><span class="line">        <span class="comment">//从pos遍历，分割子字符串，问题不重复</span></span><br><span class="line">        <span class="keyword">while</span>(pos &lt;= end) &#123;</span><br><span class="line">            start = pos; <span class="comment">// 更新start</span></span><br><span class="line">            <span class="keyword">while</span> (pos &lt;= end &amp;&amp; vaild &amp; (<span class="number">1</span> &lt;&lt; (<span class="built_in">tolower</span>(s[pos]) - <span class="string">&#x27;a&#x27;</span>))) &#123; <span class="comment">// 判断pos所指向字母是否完美</span></span><br><span class="line">                ++pos;</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="built_in">findLongestSubstring</span>(s, start, pos<span class="number">-1</span>, maxPos, maxlen); <span class="comment">//递归处理子字符串</span></span><br><span class="line">            ++pos;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+<div class="note info simple"><ul>
+<li><p>题目关于美好字符串的定义为: 字符串中的每个字母的大写和小写形式同时出现在该字符串中。检测时，由于英文字母 ‘a’−‘z’ 最多只有 26 个, 因此可以利用二进制位来进行标记，lower 标记字符中出现过小写英文字母，upper 标记字符中出现过大写英文字母。如果满足 lower=upper ，我们则认为字符串中所有的字符都满足大小写形式同时出现，则认定该字符串为美好字符串。</p>
+</li>
+<li><p>题目要求如果有多个答案，返回在字符串中最早出现的那个。此时，只需要首先检测从以字符串索引 0 为起始的子字符串。</p>
+</li>
+</ul>
+</div></article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta"><i class="fas fa-circle-user fa-fw"></i>文章作者: </span><span class="post-copyright-info"><a href="https://stack2005.github.io">Stack</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta"><i class="fas fa-square-arrow-up-right fa-fw"></i>文章链接: </span><span class="post-copyright-info"><a href="https://stack2005.github.io/posts/2633a26.html">https://stack2005.github.io/posts/2633a26.html</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta"><i class="fas fa-circle-exclamation fa-fw"></i>版权声明: </span><span class="post-copyright-info">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a> 许可协议。转载请注明来源 <a href="https://stack2005.github.io" target="_blank">Stack's Blog</a>！</span></div></div><div class="tag_share"><div class="post-meta__tag-list"><a class="post-meta__tags" href="/tags/%E7%AE%97%E6%B3%95/">算法</a></div><div class="post-share"><div class="social-share" data-image="https://bu.dusays.com/2025/03/03/67c58e7f686c7.jpg" data-sites="facebook,twitter,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/css/share.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/js/social-share.min.js" defer></script></div></div><nav class="pagination-post" id="pagination"><a class="pagination-related" href="/posts/ca312837.html" title="Docker学习（六）：🚚发布和部署"><img class="cover" src="https://bu.dusays.com/2025/02/28/67c1ae3b2076e.png" onerror="onerror=null;src='/img/404.jpg'" alt="cover of previous post"><div class="info"><div class="info-1"><div class="info-item-1">上一篇</div><div class="info-item-2">Docker学习（六）：🚚发布和部署</div></div><div class="info-2"><div class="info-item-1">发布和部署</div></div></div></a><a class="pagination-related" href="/posts/e51df790.html" title="抛弃DockerDesktop，拥抱原生Docker"><img class="cover" src="https://bu.dusays.com/2025/02/28/67c1ae3b2076e.png" onerror="onerror=null;src='/img/404.jpg'" alt="cover of next post"><div class="info text-right"><div class="info-1"><div class="info-item-1">下一篇</div><div class="info-item-2">抛弃DockerDesktop，拥抱原生Docker</div></div><div class="info-2"><div class="info-item-1">在WSL2中玩转Docker之Docker Engine 部署与WSL入门</div></div></div></a></nav></div><div class="aside-content" id="aside-content"><div class="card-widget card-info text-center"><div class="avatar-img"><img src="https://bu.dusays.com/2025/02/28/67c1a8c0f366f.jpg" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="author-info-name">Stack</div><div class="author-info-description">The spreading wide of narrow hands To gather paradise-</div><div class="site-data"><a href="/archives/"><div class="headline">文章</div><div class="length-num">18</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">12</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">6</div></a></div><a id="card-info-btn" target="_blank" rel="noopener" href="https://github.com/stack2005"><i class="fab fa-github"></i><span>Follow Me</span></a><div class="card-info-social-icons"><a class="social-icon faa-parent animated-hover" href="https://github.com/stack2005" target="_blank" title="Github"><svg class="icon faa-tada" aria-hidden="true"><use xlink:href="#icon-gitHub"></use></svg></a><a class="social-icon faa-parent animated-hover" href="https://mail.qq.com/cgi-bin/frame_html?sid=l4gKQQ8P1yadmBdw&amp;r=4b212fe917e61ea2adbefd583dff0c56&amp;lang=zh" target="_blank" title="Email"><svg class="icon faa-tada" aria-hidden="true"><use xlink:href="#icon-youxiang"></use></svg></a><a class="social-icon faa-parent animated-hover" href="/atom.xml" target="_blank" title="RSS"><svg class="icon faa-tada" aria-hidden="true"><use xlink:href="#icon-rss"></use></svg></a><a class="social-icon faa-parent animated-hover" href="https://space.bilibili.com/392208387" target="_blank" title="BiliBili"><svg class="icon faa-tada" aria-hidden="true"><use xlink:href="#icon-bilibili"></use></svg></a><a class="social-icon faa-parent animated-hover" href="tencent://Message/?Uin=2414956063&amp;amp;websiteName=local.edu.com:8888=&amp;amp;Menu=yes" target="_blank" title="QQ"><svg class="icon faa-tada" aria-hidden="true"><use xlink:href="#icon-QQ1"></use></svg></a></div></div><div class="card-widget card-announcement"><div class="item-headline"><i class="fas fa-bullhorn fa-shake"></i><span>公告</span></div><div class="announcement_content">This is my Blog</div></div><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="fas fa-stream"></i><span>目录</span><span class="toc-percentage"></span></div><div class="toc-content"><ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BD%8D%E8%BF%90%E7%AE%97"><span class="toc-number">1.</span> <span class="toc-text">位运算</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86"><span class="toc-number">1.1.</span> <span class="toc-text">基础知识</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%A6%82%E8%A7%88"><span class="toc-number">1.1.1.</span> <span class="toc-text">概览</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%A4%8D%E5%90%88%E8%B5%8B%E5%80%BC%E8%BF%90%E7%AE%97%E7%AC%A6"><span class="toc-number">1.1.2.</span> <span class="toc-text">复合赋值运算符</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%B8%B8%E7%94%A8%E4%BD%8D%E6%93%8D%E4%BD%9C%E5%B0%8F%E6%8A%80%E5%B7%A7"><span class="toc-number">1.1.3.</span> <span class="toc-text">常用位操作小技巧</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%9B%B8%E5%85%B3%E9%A2%98%E7%9B%AE"><span class="toc-number">1.2.</span> <span class="toc-text">相关题目</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E9%A2%A0%E5%80%92%E4%BA%8C%E8%BF%9B%E5%88%B6%E4%BD%8D"><span class="toc-number">1.2.1.</span> <span class="toc-text">颠倒二进制位</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#%E6%80%9D%E8%B7%AF%E4%B8%80%EF%BC%9A%E9%80%90%E4%BD%8D%E6%9B%BF%E6%8D%A2"><span class="toc-number">1.2.1.1.</span> <span class="toc-text">思路一：逐位替换</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#%E6%80%9D%E8%B7%AF%E4%BA%8C%EF%BC%9A%E5%88%86%E6%B2%BB"><span class="toc-number">1.2.1.2.</span> <span class="toc-text">思路二：分治</span></a></li></ol></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%88%86%E6%B2%BB"><span class="toc-number">2.</span> <span class="toc-text">分治</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%9B%B8%E5%85%B3%E9%A2%98%E7%9B%AE-1"><span class="toc-number">2.1.</span> <span class="toc-text">相关题目</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%9C%80%E9%95%BF%E7%9A%84%E7%BE%8E%E5%A5%BD%E5%AD%90%E5%AD%97%E7%AC%A6%E4%B8%B2"><span class="toc-number">2.1.1.</span> <span class="toc-text">最长的美好子字符串</span></a></li></ol></li></ol></li></ol></div></div><div class="card-widget card-recent-post"><div class="item-headline"><i class="fas fa-history"></i><span>最新文章</span></div><div class="aside-list"><div class="aside-list-item"><a class="thumbnail" href="/posts/5c903a76.html" title="pygame学习"><img src="https://bu.dusays.com/2025/03/05/67c7b6b93c7db.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="pygame学习"/></a><div class="content"><a class="title" href="/posts/5c903a76.html" title="pygame学习">pygame学习</a><time datetime="2025-04-17T16:00:00.000Z" title="发表于 2025-04-18 00:00:00">2025-04-18</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/posts/f7c1b6ea.html" title="MAkefile简单学习"><img src="https://bu.dusays.com/2025/03/03/67c58e7f686c7.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="MAkefile简单学习"/></a><div class="content"><a class="title" href="/posts/f7c1b6ea.html" title="MAkefile简单学习">MAkefile简单学习</a><time datetime="2025-04-14T16:00:00.000Z" title="发表于 2025-04-15 00:00:00">2025-04-15</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/posts/d561c4d0.html" title="虚言本为护心栽，怎奈真情难自埋：从友夕线看范乃秋晴如何把握人物和剧情"><img src="https://bu.dusays.com/2025/04/10/67f7cb10bd123.png" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="虚言本为护心栽，怎奈真情难自埋：从友夕线看范乃秋晴如何把握人物和剧情"/></a><div class="content"><a class="title" href="/posts/d561c4d0.html" title="虚言本为护心栽，怎奈真情难自埋：从友夕线看范乃秋晴如何把握人物和剧情">虚言本为护心栽，怎奈真情难自埋：从友夕线看范乃秋晴如何把握人物和剧情</a><time datetime="2025-04-09T16:00:00.000Z" title="发表于 2025-04-10 00:00:00">2025-04-10</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/posts/d267c650.html" title="SQL中的1=0"><img src="https://bu.dusays.com/2025/04/03/67ee48f892b85.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="SQL中的1=0"/></a><div class="content"><a class="title" href="/posts/d267c650.html" title="SQL中的1=0">SQL中的1=0</a><time datetime="2025-04-02T16:00:00.000Z" title="发表于 2025-04-03 00:00:00">2025-04-03</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/posts/e51df790.html" title="抛弃DockerDesktop，拥抱原生Docker"><img src="https://bu.dusays.com/2025/02/28/67c1ae3b2076e.png" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="抛弃DockerDesktop，拥抱原生Docker"/></a><div class="content"><a class="title" href="/posts/e51df790.html" title="抛弃DockerDesktop，拥抱原生Docker">抛弃DockerDesktop，拥抱原生Docker</a><time datetime="2025-03-17T16:00:00.000Z" title="发表于 2025-03-18 00:00:00">2025-03-18</time></div></div></div></div></div></div></main><footer id="footer"><div id="footer-wrap"><div class="copyright">&copy;2025 By Stack</div><div class="framework-info"><span>框架 </span><a target="_blank" rel="noopener" href="https://hexo.io">Hexo 7.3.0</a><span class="footer-separator">|</span><span>主题 </span><a target="_blank" rel="noopener" href="https://github.com/jerryc127/hexo-theme-butterfly">Butterfly 5.3.3</a></div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="阅读模式"><i class="fas fa-book-open"></i></button><button id="translateLink" type="button" title="简繁转换">繁</button><button id="darkmode" type="button" title="日间和夜间模式切换"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside-config" type="button" title="设置"><i class="fas fa-cog fa-spin"></i></button><button class="close" id="mobile-toc-button" type="button" title="目录"><i class="fas fa-list-ul"></i></button><button id="go-up" type="button" title="回到顶部"><span class="scroll-percent"></span><i class="fas fa-arrow-up"></i></button></div></div><div><script src="/js/utils.js"></script><script src="/js/main.js"></script><script src="/js/tw_cn.js"></script><script src="https://cdn.jsdelivr.net/npm/medium-zoom/dist/medium-zoom.min.js"></script><div class="js-pjax"></div><div class="aplayer no-destroy" data-id="2954824359" data-server="netease" data-type="playlist"   data-order="list" data-fixed="true" data-preload="auto" data-autoplay="false" data-mutex="true" ></div><script defer src="/js/cursor.js"></script><script defer src="/js/title.js"></script><script id="click-heart" src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/dist/click-heart.min.js" async="async" mobile="ture"></script><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/aplayer/dist/APlayer.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/aplayer/dist/APlayer.min.js"></script><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/metingjs/dist/Meting.min.js"></script><div class="app-refresh" id="app-refresh" style="position: fixed;top: -2.2rem;left: 0;right: 0;z-index: 99999;padding: 0 1rem;font-size: 15px;height: 2.2rem;transition: all 0.3s ease;"><div class="app-refresh-wrap" style=" display: flex;color: #fff;height: 100%;align-items: center;justify-content: center;"><label>✨ 有新文章啦！ 👉</label><a href="javascript:void(0)" onclick="location.reload()"><span style="color: #fff;text-decoration: underline;cursor: pointer;">🍗点击食用🍔</span></a></div></div><script>if ('serviceWorker' in navigator) {
+if (navigator.serviceWorker.controller) {
+navigator.serviceWorker.addEventListener('controllerchange', function() {
+showNotification()
+})
+}
+window.addEventListener('load', function() {
+navigator.serviceWorker.register('/sw.js')
+})
+}
+function showNotification() {
+if (GLOBAL_CONFIG.Snackbar) {
+var snackbarBg =
+document.documentElement.getAttribute('data-theme') === 'light' ?
+GLOBAL_CONFIG.Snackbar.bgLight :
+GLOBAL_CONFIG.Snackbar.bgDark
+var snackbarPos = GLOBAL_CONFIG.Snackbar.position
+Snackbar.show({
+text: '✨ 有新文章啦！ 👉',
+backgroundColor: snackbarBg,
+duration: 500000,
+pos: snackbarPos,
+actionText: '🍗点击食用🍔',
+actionTextColor: '#fff',
+onActionClick: function(e) {
+location.reload()
+},
+})
+} else {
+var showBg =
+document.documentElement.getAttribute('data-theme') === 'light' ?
+'#3b70fc' :
+'#1f1f1f'
+var cssText = `top: 0; background: ${showBg};`
+document.getElementById('app-refresh').style.cssText = cssText
+}
+}</script><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script><div id="local-search"><div class="search-dialog"><nav class="search-nav"><span class="search-dialog-title">搜索</span><span id="loading-status"></span><button class="search-close-button"><i class="fas fa-times"></i></button></nav><div class="text-center" id="loading-database"><i class="fas fa-spinner fa-pulse"></i><span>  数据加载中</span></div><div class="search-wrap"><div id="local-search-input"><div class="local-search-box"><input class="local-search-box--input" placeholder="搜索文章" type="text"/></div></div><hr/><div id="local-search-results"></div><div id="local-search-stats-wrap"></div></div></div><div id="search-mask"></div><script src="/js/search/local-search.js"></script></div></div><!-- hexo injector body_end start --><script data-pjax>
+    function butterfly_categories_card_injector_config(){
+      var parent_div_git = document.getElementById('recent-posts');
+      var item_html = '<style>li.categoryBar-list-item{width:32.3%;}.categoryBar-list{max-height: 190px;overflow:auto;}.categoryBar-list::-webkit-scrollbar{width:0!important}@media screen and (max-width: 650px){.categoryBar-list{max-height: 160px;}}</style><div class="recent-post-item" style="height:auto;width:100%;padding:0px;"><div id="categoryBar"><ul class="categoryBar-list"><li class="categoryBar-list-item" style="background:url(https://cdn.cbd.int/akilar-candyassets@1.0.36/image/cover1.webp);"> <a class="categoryBar-list-link" href="categories/编程基础/">编程基础</a><span class="categoryBar-list-count">12</span><span class="categoryBar-list-descr">博客日志</span></li><li class="categoryBar-list-item" style="background:url(https://cdn.cbd.int/akilar-candyassets@1.0.36/image/cover2.webp);"> <a class="categoryBar-list-link" href="categories/博客/">博客</a><span class="categoryBar-list-count">2</span><span class="categoryBar-list-descr">一砖一瓦</span></li><li class="categoryBar-list-item" style="background:url(https://cdn.cbd.int/akilar-candyassets@1.0.36/image/cover3.webp);"> <a class="categoryBar-list-link" href="categories/SQL/">SQL</a><span class="categoryBar-list-count">1</span><span class="categoryBar-list-descr">生活欢乐多</span></li><li class="categoryBar-list-item" style="background:url(https://cdn.cbd.int/akilar-candyassets@1.0.36/image/cover4.webp);"> <a class="categoryBar-list-link" href="categories/文章推荐/">文章推荐</a><span class="categoryBar-list-count">1</span><span class="categoryBar-list-descr"></span></li><li class="categoryBar-list-item" style="background:url(https://cdn.cbd.int/akilar-candyassets@1.0.36/image/cover5.webp);"> <a class="categoryBar-list-link" href="categories/算法/">算法</a><span class="categoryBar-list-count">1</span><span class="categoryBar-list-descr"></span></li><li class="categoryBar-list-item" style="background:url(https://cdn.cbd.int/akilar-candyassets@1.0.36/image/cover6.webp);"> <a class="categoryBar-list-link" href="categories/游戏/">游戏</a><span class="categoryBar-list-count">1</span><span class="categoryBar-list-descr"></span></li></ul></div></div>';
+      console.log('已挂载butterfly_categories_card')
+      parent_div_git.insertAdjacentHTML("afterbegin",item_html)
+      }
+    if( document.getElementById('recent-posts') && (location.pathname ==='/'|| '/' ==='all')){
+    butterfly_categories_card_injector_config()
+    }
+  </script><script data-pjax>
+  function butterfly_footer_beautify_injector_config(){
+    var parent_div_git = document.getElementById('footer-wrap');
+    var item_html = '<div id="workboard"></div><p id="ghbdages"><a class="github-badge" target="_blank" href="https://hexo.io/" style="margin-inline:5px" data-title="博客框架为Hexo_v5.4.0" title=""><img src="https://img.shields.io/badge/Frame-Hexo-blue?style=flat&amp;logo=hexo" alt=""/></a><a class="github-badge" target="_blank" href="https://butterfly.js.org/" style="margin-inline:5px" data-title="主题版本Butterfly_v4.2.2" title=""><img src="https://img.shields.io/badge/Theme-Butterfly-6513df?style=flat&amp;logo=bitdefender" alt=""/></a><a class="github-badge" target="_blank" href="https://www.jsdelivr.com/" style="margin-inline:5px" data-title="本站使用JsDelivr为静态资源提供CDN加速" title=""><img src="https://img.shields.io/badge/CDN-jsDelivr-orange?style=flat&amp;logo=jsDelivr" alt=""/></a><a class="github-badge" target="_blank" href="https://github.com/" style="margin-inline:5px" data-title="本站项目由Github托管" title=""><img src="https://img.shields.io/badge/Source-Github-d021d6?style=flat&amp;logo=GitHub" alt=""/></a><a class="github-badge" target="_blank" href="http://creativecommons.org/licenses/by-nc-sa/4.0/" style="margin-inline:5px" data-title="本站采用知识共享署名-非商业性使用-相同方式共享4.0国际许可协议进行许可" title=""><img src="https://img.shields.io/badge/Copyright-BY--NC--SA%204.0-d42328?style=flat&amp;logo=Claris" alt=""/></a></p>';
+    console.log('已挂载butterfly_footer_beautify')
+    parent_div_git.insertAdjacentHTML("beforeend",item_html)
+    }
+  var elist = 'null'.split(',');
+  var cpage = location.pathname;
+  var epage = 'all';
+  var flag = 0;
+
+  for (var i=0;i<elist.length;i++){
+    if (cpage.includes(elist[i])){
+      flag++;
+    }
+  }
+
+  if ((epage ==='all')&&(flag == 0)){
+    butterfly_footer_beautify_injector_config();
+  }
+  else if (epage === cpage){
+    butterfly_footer_beautify_injector_config();
+  }
+  </script><script async src="/js/runtime/runtime.min.js"></script><script async src="/js/ali_font.js"></script><div class="js-pjax"><script async="async">var arr = document.getElementsByClassName('recent-post-item');
+for(var i = 0;i<arr.length;i++){
+    arr[i].classList.add('wow');
+    arr[i].classList.add('animate__zoomIn');
+    arr[i].setAttribute('data-wow-duration', '1.5s');
+    arr[i].setAttribute('data-wow-delay', '200ms');
+    arr[i].setAttribute('data-wow-offset', '30');
+    arr[i].setAttribute('data-wow-iteration', '1');
+  }</script><script async="async">var arr = document.getElementsByClassName('card-widget');
+for(var i = 0;i<arr.length;i++){
+    arr[i].classList.add('wow');
+    arr[i].classList.add('animate__zoomIn');
+    arr[i].setAttribute('data-wow-duration', '');
+    arr[i].setAttribute('data-wow-delay', '200ms');
+    arr[i].setAttribute('data-wow-offset', '');
+    arr[i].setAttribute('data-wow-iteration', '');
+  }</script><script async="async">var arr = document.getElementsByClassName('flink-list-card');
+for(var i = 0;i<arr.length;i++){
+    arr[i].classList.add('wow');
+    arr[i].classList.add('animate__flipInY');
+    arr[i].setAttribute('data-wow-duration', '3s');
+    arr[i].setAttribute('data-wow-delay', '');
+    arr[i].setAttribute('data-wow-offset', '');
+    arr[i].setAttribute('data-wow-iteration', '');
+  }</script><script async="async">var arr = document.getElementsByClassName('flink-list-card');
+for(var i = 0;i<arr.length;i++){
+    arr[i].classList.add('wow');
+    arr[i].classList.add('animate__animated');
+    arr[i].setAttribute('data-wow-duration', '3s');
+    arr[i].setAttribute('data-wow-delay', '');
+    arr[i].setAttribute('data-wow-offset', '');
+    arr[i].setAttribute('data-wow-iteration', '');
+  }</script><script async="async">var arr = document.getElementsByClassName('article-sort-item');
+for(var i = 0;i<arr.length;i++){
+    arr[i].classList.add('wow');
+    arr[i].classList.add('animate__slideInRight');
+    arr[i].setAttribute('data-wow-duration', '1.5s');
+    arr[i].setAttribute('data-wow-delay', '');
+    arr[i].setAttribute('data-wow-offset', '');
+    arr[i].setAttribute('data-wow-iteration', '');
+  }</script><script async="async">var arr = document.getElementsByClassName('site-card');
+for(var i = 0;i<arr.length;i++){
+    arr[i].classList.add('wow');
+    arr[i].classList.add('animate__flipInY');
+    arr[i].setAttribute('data-wow-duration', '3s');
+    arr[i].setAttribute('data-wow-delay', '');
+    arr[i].setAttribute('data-wow-offset', '');
+    arr[i].setAttribute('data-wow-iteration', '');
+  }</script><script async="async">var arr = document.getElementsByClassName('site-card');
+for(var i = 0;i<arr.length;i++){
+    arr[i].classList.add('wow');
+    arr[i].classList.add('animate__animated');
+    arr[i].setAttribute('data-wow-duration', '3s');
+    arr[i].setAttribute('data-wow-delay', '');
+    arr[i].setAttribute('data-wow-offset', '');
+    arr[i].setAttribute('data-wow-iteration', '');
+  }</script></div><script defer src="https://cdn.cbd.int/hexo-butterfly-wowjs/lib/wow.min.js"></script><script defer src="https://cdn.cbd.int/hexo-butterfly-wowjs/lib/wow_init.js"></script><script data-pjax src="https://registry.npmmirror.com/oh-my-live2d/latest/files"></script><script>const oml2d = OML2D.loadOml2d({libraryUrls:{"complete":"https://registry.npmmirror.com/oh-my-live2d/latest/files/lib/complete.js","cubism2":"https://registry.npmmirror.com/oh-my-live2d/latest/files/lib/cubism2.js","cubism5":"https://registry.npmmirror.com/oh-my-live2d/latest/files/lib/cubism5.js"},mobileDisplay:true,dockedPosition:"right",models:[{"path":"https://cdn.statically.io/gh/stack2005/live-2d-resource-bed/main/%E7%BA%B1%E9%9B%BElive2d/model/sagiri/sagiri.model.json","mobilePosition":[0,0],"mobileScale":0.1,"mobileStageStyle":{"width":180,"height":166},"motionPreloadStrategy":"IDLE","position":[30,0],"scale":0.13,"stageStyle":{"width":270,"height":200}},{"path":"https://cdn.statically.io/gh/stack2005/live-2d-resource-bed/main/%E5%8A%A0%E8%97%A4%E6%83%A0live2d/model/katou_01/katou_01.model.json","scale":0.12,"position":[-15,-120],"stageStyle":{"width":270,"height":270},"mobileScale":0.08,"mobilePosition":[0,0],"mobileStageStyle":{"width":180}},{"path":"https://cdn.statically.io/gh/stack2005/live-2d-resource-bed/main/abeikelongbi_3/abeikelongbi_3.model3.json","scale":0.05,"position":[-50,10],"mobileScale":0.08,"mobilePosition":[0,0],"mobileStageStyle":{"width":180},"stageStyle":{"width":270,"height":350}}],parentElement:document.body,primaryColor:"var(--btn-bg)",sayHello:false,tips:{style: {"width":230,"height":120,"left":"calc(50% - 20px)","top":"-100px"},mobileStyle: {"width":180,"height":80,"left":"calc(50% - 30px)","top":"-100px"},idleTips:{interval:15000,message:function(){
+  return axios.get('https://v1.hitokoto.cn?c=i')
+    .then(function (response) {
+      return response.data.hitokoto ;
+    })
+    .catch(function (error) {
+      console.error(error);
+    });
+}
+}}});</script><!-- hexo injector body_end end --></body></html>

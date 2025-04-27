@@ -1,0 +1,760 @@
+<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0,viewport-fit=cover"><title>pygame学习 | Stack's Blog</title><meta name="author" content="Stack,liuruiqi2005@yeah.net"><meta name="copyright" content="Stack"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta name="description" content="学习pygame">
+<meta property="og:type" content="article">
+<meta property="og:title" content="pygame学习">
+<meta property="og:url" content="https://stack2005.github.io/posts/5c903a76.html">
+<meta property="og:site_name" content="Stack&#39;s Blog">
+<meta property="og:description" content="学习pygame">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://bu.dusays.com/2025/03/05/67c7b6b93c7db.jpg">
+<meta property="article:published_time" content="2025-04-17T16:00:00.000Z">
+<meta property="article:modified_time" content="2025-04-17T16:00:00.000Z">
+<meta property="article:author" content="Stack">
+<meta property="article:tag" content="python">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://bu.dusays.com/2025/03/05/67c7b6b93c7db.jpg"><script type="application/ld+json">{
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "headline": "pygame学习",
+  "url": "https://stack2005.github.io/posts/5c903a76.html",
+  "image": "https://bu.dusays.com/2025/03/05/67c7b6b93c7db.jpg",
+  "datePublished": "2025-04-17T16:00:00.000Z",
+  "dateModified": "2025-04-17T16:00:00.000Z",
+  "author": [
+    {
+      "@type": "Person",
+      "name": "Stack",
+      "url": "https://stack2005.github.io/"
+    }
+  ]
+}</script><link rel="shortcut icon" href="/img/favicon.png"><link rel="canonical" href="https://stack2005.github.io/posts/5c903a76.html"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><link rel="manifest" href="/manifest.json"/><meta name="msapplication-TileColor" content="#3b70fc"/><link rel="apple-touch-icon" sizes="180x180" href="/img/siteicon/128.png"/><link rel="icon" type="image/png" sizes="32x32" href="/img/siteicon/32.png"/><link rel="icon" type="image/png" sizes="16x16" href="/img/siteicon/16.png"/><link rel="mask-icon" href="/img/siteicon/128.png" color="#5bbad5"/><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/css/all.min.css"><script>
+    (() => {
+      
+    const saveToLocal = {
+      set: (key, value, ttl) => {
+        if (!ttl) return
+        const expiry = Date.now() + ttl * 86400000
+        localStorage.setItem(key, JSON.stringify({ value, expiry }))
+      },
+      get: key => {
+        const itemStr = localStorage.getItem(key)
+        if (!itemStr) return undefined
+        const { value, expiry } = JSON.parse(itemStr)
+        if (Date.now() > expiry) {
+          localStorage.removeItem(key)
+          return undefined
+        }
+        return value
+      }
+    }
+
+    window.btf = {
+      saveToLocal,
+      getScript: (url, attr = {}) => new Promise((resolve, reject) => {
+        const script = document.createElement('script')
+        script.src = url
+        script.async = true
+        Object.entries(attr).forEach(([key, val]) => script.setAttribute(key, val))
+        script.onload = script.onreadystatechange = () => {
+          if (!script.readyState || /loaded|complete/.test(script.readyState)) resolve()
+        }
+        script.onerror = reject
+        document.head.appendChild(script)
+      }),
+      getCSS: (url, id) => new Promise((resolve, reject) => {
+        const link = document.createElement('link')
+        link.rel = 'stylesheet'
+        link.href = url
+        if (id) link.id = id
+        link.onload = link.onreadystatechange = () => {
+          if (!link.readyState || /loaded|complete/.test(link.readyState)) resolve()
+        }
+        link.onerror = reject
+        document.head.appendChild(link)
+      }),
+      addGlobalFn: (key, fn, name = false, parent = window) => {
+        if (!false && key.startsWith('pjax')) return
+        const globalFn = parent.globalFn || {}
+        globalFn[key] = globalFn[key] || {}
+        globalFn[key][name || Object.keys(globalFn[key]).length] = fn
+        parent.globalFn = globalFn
+      }
+    }
+  
+      
+      const activateDarkMode = () => {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+        }
+      }
+      const activateLightMode = () => {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff')
+        }
+      }
+
+      btf.activateDarkMode = activateDarkMode
+      btf.activateLightMode = activateLightMode
+
+      const theme = saveToLocal.get('theme')
+    
+          theme === 'dark' ? activateDarkMode() : theme === 'light' ? activateLightMode() : null
+        
+      
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        document.documentElement.classList.toggle('hide-aside', asideStatus === 'hide')
+      }
+    
+      
+    const detectApple = () => {
+      if (/iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)) {
+        document.documentElement.classList.add('apple')
+      }
+    }
+    detectApple()
+  
+    })()
+  </script><script>const GLOBAL_CONFIG = {
+  root: '/',
+  algolia: undefined,
+  localSearch: {"path":"/search.xml","preload":true,"top_n_per_article":1,"unescape":false,"languages":{"hits_empty":"未找到符合您查询的内容：${query}","hits_stats":"共找到 ${hits} 篇文章"}},
+  translate: {"defaultEncoding":2,"translateDelay":0,"msgToTraditionalChinese":"繁","msgToSimplifiedChinese":"簡"},
+  highlight: {"plugin":"highlight.js","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":false,"highlightFullpage":false,"highlightMacStyle":true},
+  copy: {
+    success: '复制成功',
+    error: '复制失败',
+    noSupport: '浏览器不支持'
+  },
+  relativeDate: {
+    homepage: false,
+    post: false
+  },
+  runtime: '',
+  dateSuffix: {
+    just: '刚刚',
+    min: '分钟前',
+    hour: '小时前',
+    day: '天前',
+    month: '个月前'
+  },
+  copyright: undefined,
+  lightbox: 'medium_zoom',
+  Snackbar: undefined,
+  infinitegrid: {
+    js: 'https://cdn.jsdelivr.net/npm/@egjs/infinitegrid/dist/infinitegrid.min.js',
+    buttonText: '加载更多'
+  },
+  isPhotoFigcaption: false,
+  islazyloadPlugin: false,
+  isAnchor: false,
+  percent: {
+    toc: true,
+    rightside: false,
+  },
+  autoDarkmode: false
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  title: 'pygame学习',
+  isHighlightShrink: false,
+  isToc: true,
+  pageType: 'post'
+}</script><link rel="stylesheet" href="/css/custom.css" media="defer" onload="this.media='all'"><link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/zhheo/JS-Heo@main/tag-link/tag-link.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/zhheo/JS-Heo@master/mainColor/heoMainColor.css"><!-- hexo injector head_end start --><link rel="stylesheet" href="https://cdn.cbd.int/hexo-butterfly-categories-card@1.0.0/lib/categorybar.css"><link rel="stylesheet" href="https://npm.elemecdn.com/anzhiyu-blog@2.0.4/css/runtime/runtime.min.css" media="print" onload="this.media='all'"><link rel="stylesheet" href="https://cdn.cbd.int/hexo-butterfly-tag-plugins-plus@latest/lib/assets/font-awesome-animation.min.css" media="defer" onload="this.media='all'"><link rel="stylesheet" href="https://cdn.cbd.int/hexo-butterfly-tag-plugins-plus@latest/lib/tag_plugins.css" media="defer" onload="this.media='all'"><script src="https://cdn.cbd.int/hexo-butterfly-tag-plugins-plus@latest/lib/assets/carousel-touch.js"></script><link rel="stylesheet" href="https://cdn.cbd.int/hexo-butterfly-wowjs/lib/animate.min.css" media="print" onload="this.media='screen'"><!-- hexo injector head_end end --><meta name="generator" content="Hexo 7.3.0"><link rel="alternate" href="/atom.xml" title="Stack's Blog" type="application/atom+xml">
+</head><body><div id="web_bg" style="background-image: url(https://bu.dusays.com/2025/02/28/67c1a8671cb66.jpg);"></div><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img text-center"><img src="https://bu.dusays.com/2025/02/28/67c1a8c0f366f.jpg" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="site-data text-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">18</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">12</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">6</div></a></div><div class="menus_items"><div class="menus_item"><a class="site-page faa-parent animated-hover" href="/"><i class="fa-fw fas fa-home faa-tada"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page faa-parent animated-hover" href="/shuoshuo/"><i class="fa-fw fas fa-comment-dots faa-tada"></i><span> 闲言碎语</span></a></div><div class="menus_item"><a class="site-page faa-parent animated-hover" href="/gallery/"><i class="fa-fw fas fa-images faa-tada"></i><span> gallery</span></a></div><div class="menus_item"><a class="site-page faa-parent animated-hover" href="javascript:void(0);"><i class="fa-fw fas fa-list faa-tada"></i><span> List</span><i class="fas fa-chevron-down expand"></i></a><ul class="menus_item_child"><li><a class="site-page child faa-parent animated-hover" href="/archives/"><i class="fa-fw fas fa-archive faa-tada"></i><span> 时间轴</span></a></li><li><a class="site-page child faa-parent animated-hover" href="/tags/"><i class="fa-fw fas fa-tags faa-tada"></i><span> 标签</span></a></li><li><a class="site-page child faa-parent animated-hover" href="/categories/"><i class="fa-fw fas fa-folder-open faa-tada"></i><span> 分类</span></a></li></ul></div><div class="menus_item"><a class="site-page faa-parent animated-hover" href="/comments/"><i class="fa-fw fas fa-envelope faa-tada"></i><span> 留言板</span></a></div><div class="menus_item"><a class="site-page faa-parent animated-hover" href="/link/"><i class="fa-fw fas fa-link faa-tada"></i><span> 友人帐</span></a></div><div class="menus_item"><a class="site-page faa-parent animated-hover" href="/bangumis/"><svg class="icon faa-tada" aria-hidden="true"><use xlink:href="#icon-bilibili1"></use></svg><span> 追番</span></a></div><div class="menus_item"><a class="site-page faa-parent animated-hover" href="/about/"><svg class="icon faa-tada" aria-hidden="true"><use xlink:href="#icon-zhifeiji"></use></svg><span> 关于</span></a></div></div></div></div><div class="post" id="body-wrap"><header class="post-bg" id="page-header" style="background-image: url(https://bu.dusays.com/2025/03/05/67c7b6b93c7db.jpg);"><nav id="nav"><span id="blog-info"><a class="nav-site-title" href="/"><span class="site-name">Stack's Blog</span></a><a class="nav-page-title" href="/"><span class="site-name">pygame学习</span></a></span><div id="menus"><div id="search-button"><span class="site-page social-icon search"><i class="fas fa-search fa-fw"></i><span> 搜索</span></span></div><div class="menus_items"><div class="menus_item"><a class="site-page faa-parent animated-hover" href="/"><i class="fa-fw fas fa-home faa-tada"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page faa-parent animated-hover" href="/shuoshuo/"><i class="fa-fw fas fa-comment-dots faa-tada"></i><span> 闲言碎语</span></a></div><div class="menus_item"><a class="site-page faa-parent animated-hover" href="/gallery/"><i class="fa-fw fas fa-images faa-tada"></i><span> gallery</span></a></div><div class="menus_item"><a class="site-page faa-parent animated-hover" href="javascript:void(0);"><i class="fa-fw fas fa-list faa-tada"></i><span> List</span><i class="fas fa-chevron-down expand"></i></a><ul class="menus_item_child"><li><a class="site-page child faa-parent animated-hover" href="/archives/"><i class="fa-fw fas fa-archive faa-tada"></i><span> 时间轴</span></a></li><li><a class="site-page child faa-parent animated-hover" href="/tags/"><i class="fa-fw fas fa-tags faa-tada"></i><span> 标签</span></a></li><li><a class="site-page child faa-parent animated-hover" href="/categories/"><i class="fa-fw fas fa-folder-open faa-tada"></i><span> 分类</span></a></li></ul></div><div class="menus_item"><a class="site-page faa-parent animated-hover" href="/comments/"><i class="fa-fw fas fa-envelope faa-tada"></i><span> 留言板</span></a></div><div class="menus_item"><a class="site-page faa-parent animated-hover" href="/link/"><i class="fa-fw fas fa-link faa-tada"></i><span> 友人帐</span></a></div><div class="menus_item"><a class="site-page faa-parent animated-hover" href="/bangumis/"><svg class="icon faa-tada" aria-hidden="true"><use xlink:href="#icon-bilibili1"></use></svg><span> 追番</span></a></div><div class="menus_item"><a class="site-page faa-parent animated-hover" href="/about/"><svg class="icon faa-tada" aria-hidden="true"><use xlink:href="#icon-zhifeiji"></use></svg><span> 关于</span></a></div></div><div id="toggle-menu"><span class="site-page"><i class="fas fa-bars fa-fw"></i></span></div></div></nav><div id="post-info"><h1 class="post-title">pygame学习</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">发表于</span><time class="post-meta-date-created" datetime="2025-04-17T16:00:00.000Z" title="发表于 2025-04-18 00:00:00">2025-04-18</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2025-04-17T16:00:00.000Z" title="更新于 2025-04-18 00:00:00">2025-04-18</time></span><span class="post-meta-categories"><span class="post-meta-separator">|</span><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/categories/%E7%BC%96%E7%A8%8B%E5%9F%BA%E7%A1%80/">编程基础</a></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-pv-cv" id="" data-flag-title=""><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">浏览量:</span><span id="busuanzi_value_page_pv"><i class="fa-solid fa-spinner fa-spin"></i></span></span></div></div></div></header><main class="layout" id="content-inner"><div id="post"><article class="container post-content" id="article-container"><div id="post-outdate-notice" data="{&quot;limitDay&quot;:365,&quot;messagePrev&quot;:&quot;It has been&quot;,&quot;messageNext&quot;:&quot;days since the last update, the content of the article may be outdated.&quot;,&quot;postUpdate&quot;:&quot;2025-04-18 00:00:00&quot;}" hidden></div><h2 id="pygame-安装"><a href="#pygame-安装" class="headerlink" title="pygame 安装"></a>pygame 安装</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pip install pygame</span><br></pre></td></tr></table></figure>
+<h2 id="第一个pygame"><a href="#第一个pygame" class="headerlink" title="第一个pygame"></a>第一个pygame</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#导入所需的模块</span></span><br><span class="line"><span class="keyword">import</span> sys</span><br><span class="line"><span class="keyword">import</span> pygame</span><br><span class="line"></span><br><span class="line"><span class="comment"># 使用pygame之前必须初始化</span></span><br><span class="line">pygame.init()</span><br><span class="line"></span><br><span class="line"><span class="comment"># 设置主屏窗口</span></span><br><span class="line">screen = pygame.display.set_mode((<span class="number">400</span>,<span class="number">400</span>))</span><br><span class="line"></span><br><span class="line"><span class="comment"># 设置窗口的标题，即游戏名称</span></span><br><span class="line">pygame.display.set_caption(<span class="string">&#x27;hello world&#x27;</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 引入字体类型</span></span><br><span class="line">f = pygame.font.Font(<span class="string">&#x27;C:/Windows/Fonts/simhei.ttf&#x27;</span>,<span class="number">50</span>)</span><br><span class="line"><span class="comment"># 生成文本信息，第一个参数文本内容；第二个参数，字体是否平滑；</span></span><br><span class="line"><span class="comment"># 第三个参数，RGB模式的字体颜色；第四个参数，RGB模式字体背景颜色；</span></span><br><span class="line">text = f.render(<span class="string">&quot;老公是1我是0&quot;</span>,<span class="literal">True</span>,(<span class="number">255</span>,<span class="number">0</span>,<span class="number">0</span>),(<span class="number">0</span>,<span class="number">0</span>,<span class="number">0</span>))</span><br><span class="line"><span class="comment">#获得显示对象的rect区域坐标</span></span><br><span class="line">textRect =text.get_rect()</span><br><span class="line"><span class="comment"># 设置显示对象居中</span></span><br><span class="line">textRect.center = (<span class="number">200</span>,<span class="number">200</span>)</span><br><span class="line"><span class="comment"># 将准备好的文本信息，绘制到主屏幕 Screen 上。</span></span><br><span class="line">screen.blit(text,textRect)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 固定代码段，实现点击&quot;X&quot;号退出界面的功能，几乎所有的pygame都会使用该段代码</span></span><br><span class="line"><span class="keyword">while</span> <span class="literal">True</span>:</span><br><span class="line">    <span class="comment"># 循环获取事件，监听事件状态</span></span><br><span class="line">    <span class="keyword">for</span> event <span class="keyword">in</span> pygame.event.get():</span><br><span class="line">        <span class="comment"># 判断用户是否点了&quot;X&quot;关闭按钮,并执行if代码段</span></span><br><span class="line">        <span class="keyword">if</span> event.<span class="built_in">type</span> == pygame.QUIT:</span><br><span class="line">            <span class="comment">#卸载所有模块</span></span><br><span class="line">            pygame.quit()</span><br><span class="line">            <span class="comment">#终止程序，确保退出程序</span></span><br><span class="line">            sys.exit()</span><br><span class="line">    pygame.display.flip() <span class="comment">#更新屏幕内容</span></span><br></pre></td></tr></table></figure>
+<h3 id="初始化程序"><a href="#初始化程序" class="headerlink" title="初始化程序"></a>初始化程序</h3><p>在使用 Pygame 编写程序前，要做的第一个步骤是“初始化程序”，代码如下所示：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pygame.init()</span><br></pre></td></tr></table></figure>
+<p>这是整个程序中的第一句代码，它的作用是自动检测 Pygame 软件包是否正常可用，并检查电脑的硬件调用接口、基础功能是否存在问题，比如音频、光驱、声卡驱动等设备。同时，它会完成 Pygame 中所有模块的初始化操作，比如 display（显示模块）、font（字体模块）、mixer（声音控制模块）、cursors（光标控制模块）等。</p>
+<h3 id="创建Surface对象"><a href="#创建Surface对象" class="headerlink" title="创建Surface对象"></a>创建Surface对象</h3><p>想要掌握 Pygame 的编程逻辑，首先就要理解 surface 对象的概念，它是 Pygame 中最重要的组成部分。</p>
+<p>Surface 翻译为表面、表层、外观，在 Pygame 中，您可以把 surface 对象理解成一张“白纸”，通过这张纸可以做许多的事情，比如在纸上添加文字、填充颜色、添加图片以及绘制任意形状的图形等。既然是“纸”就有规格尺寸，Pygame 允许您创建任意大小的纸。</p>
+<p>那么我们应该如何创建 Surface 对象呢？Pygame 提供了多种创建 Surface 对象的方法，这里先介绍以下几种方法。</p>
+<p>上述示例，使用如下方式创建了一个 surface 对象：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#也叫screen对象，本质上是一个Surface，大小400*400</span></span><br><span class="line">screen = pygame.display.set_mode((<span class="number">400</span>,<span class="number">400</span>))</span><br></pre></td></tr></table></figure>
+<p>screen 的本质上就是一个 Surface 对象，它是游戏的主窗口，也就是整个游戏中尺寸最大的“纸”，任何其他的 Surface 对象都需要附着在这张最大的“纸”上，比如创建一个包含文本的 Surface 对象，通过以下方法将它绘制在主屏幕上：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#创建一个包含文字的Surface对象</span></span><br><span class="line">text = f.render(<span class="string">&quot;老公是1我是0&quot;</span>,<span class="literal">True</span>,(<span class="number">255</span>,<span class="number">0</span>,<span class="number">0</span>),(<span class="number">0</span>,<span class="number">0</span>,<span class="number">0</span>))</span><br><span class="line"><span class="comment">#通过blit方法将其绘制在主屏幕上，这里的textRect表示位置坐标</span></span><br><span class="line">screen.blit(text,textRect)</span><br></pre></td></tr></table></figure>
+<p>如果想创建一个包含图像的 surface 对象可以使用如下方法：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">surface_image =pygame.image.load(<span class="string">&quot;图片路径&quot;</span>) </span><br></pre></td></tr></table></figure>
+<h3 id="事件监听"><a href="#事件监听" class="headerlink" title="事件监听"></a>事件监听</h3><p>游戏，在我们日常生活中经常接触到，无论是手游、还是电脑端游戏，已经成了信息社会中，不可或缺的一部分。</p>
+<p>游戏大致来讲是由动画和人机交互的体验两部分构成，其中动画则是由一系列连续静止的图片，经过一定频率的刷新构成的，这个频率被称为 FPS，如果频率值越大则画面越流畅；如果频率值越小则画面会出现卡顿的感，在游戏过程中一般人能接受的最低 FPS 约为 30Hz，如果想要画面流畅则 FPS 要大于 60 Hz。</p>
+<p>动画保证了玩家的视觉体验，而人机交互则是操作上的体验。通过移动和点击鼠标、按下键盘上的技能键，或是滑动手机屏幕等操作来实现人机交互，这些与游戏程序交互的操作被称为事件（Event）。</p>
+<p>Pygame 作为一个游戏开发库，同样具有设置和监听事件的功能。它提供了一个 enevt 事件模块，这个模块中包含了所有常用到游戏事件。下面是退出游戏的代码示例（其他事件类型，后续会做介绍）：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 循环获取事件，监听事件状态，使用get()获取事件</span></span><br><span class="line"><span class="keyword">for</span> event <span class="keyword">in</span> pygame.event.get():</span><br><span class="line">    <span class="comment"># 判断事件类型，用户是否点了&quot;X&quot;关闭按钮</span></span><br><span class="line">    <span class="comment"># pygame.QUIT 指点击右上角窗口的&quot;X&quot;号</span></span><br><span class="line">    <span class="keyword">if</span> event.<span class="built_in">type</span> == pygame.QUIT:</span><br><span class="line">        <span class="comment">#点击后，卸载所有pygame模块</span></span><br><span class="line">        pygame.quit()</span><br></pre></td></tr></table></figure>
+<h3 id="游戏循环"><a href="#游戏循环" class="headerlink" title="游戏循环"></a>游戏循环</h3><p>当打我们游戏时可能会触发游戏中的各种事件，比如鼠标事件、键盘按键事件、摄像拍照事件等等，因此游戏程序需要一直循环监听玩家的操作，只有当用户点击了游戏“关闭”按钮时，监听才会结束。如果想要达到“循环监听”目的，此时就需要设置一个游戏循环（Game Loop）也称为游戏的主循环，这样才能保证人机交互的体验感。代码示例如下：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#游戏主循环(游戏循环)</span></span><br><span class="line"><span class="keyword">while</span> <span class="literal">True</span>:</span><br><span class="line">    <span class="comment"># 循环获取事件，监听事件</span></span><br><span class="line">    <span class="keyword">for</span> event <span class="keyword">in</span> pygame.event.get():</span><br><span class="line">        <span class="comment"># 判断用户是否点了关闭按钮</span></span><br><span class="line">        <span class="keyword">if</span> event.<span class="built_in">type</span> == pygame.QUIT:</span><br><span class="line">            <span class="comment"># 当用户关闭游戏窗口时执行以下操作</span></span><br><span class="line">            <span class="comment"># 这里必须调用quit()方法，退出游戏</span></span><br><span class="line">            pygame.quit()</span><br><span class="line">            <span class="comment">#终止系统</span></span><br><span class="line">            sys.exit()</span><br><span class="line">    <span class="comment">#更新并绘制屏幕内容</span></span><br><span class="line">    pygame.display.flip() </span><br></pre></td></tr></table></figure>
+<p>游戏主循环是每个 Pygame 游戏程序中必不可少的一部分，它主要承担着以下三个重要任务：</p>
+<ul>
+<li>处理游戏事件</li>
+<li>更新游戏状态</li>
+<li>把更新后的游戏状态绘制到屏幕上</li>
+</ul>
+<p><img src="https://c.biancheng.net/uploads/allimg/211109/105U22616-1.gif" alt="pygame程序"></p>
+<p>游戏画面和游戏操作状态会因为动画效果和玩家的操作而改变，因此需要以循环的方式实时地更新主屏幕（screen）的显示内容。把下列代码放入游戏主循环中即可实现实时更新和绘制屏幕内容，如下所示：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#刷新界面显示</span></span><br><span class="line">pygame.display.flip() </span><br></pre></td></tr></table></figure>
+<p>除了上述方法外，Pygame 还提供了另一个方法。如下所示：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pygame.display.update() </span><br></pre></td></tr></table></figure>
+<p>这两个方法的主要区别是：<strong>后者可以根据选定的区域来更新部分内容，而前者则是更新整个待显示的内容。</strong>如果后者没有提供区域位置参数时，其作用和 display.flip() 相同。</p>
+<h2 id="Display显示模块"><a href="#Display显示模块" class="headerlink" title="Display显示模块"></a>Display显示模块</h2><p>Pygame 使用<code>pygame.display</code>显示模块中的方法创建游戏的主窗口：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pygame.display.set_mode(size, flags, depth, display, vsync)</span><br></pre></td></tr></table></figure>
+<p>上述函数有两个参数常用参数：</p>
+<ul>
+<li>size：元组参数，用来设置主窗口的大小</li>
+<li>flags：功能标志位，表示创建的主窗口样式，比如创建全屏窗口、无边框窗口等，flags 参数值见下表。</li>
+</ul>
+<div class="table-container">
+<table>
+<thead>
+<tr>
+<th>标志位</th>
+<th>功能</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>pygame.FULLSCREEN</td>
+<td>创建一个全屏窗口。</td>
+</tr>
+<tr>
+<td>pygame.HWSURFACE</td>
+<td>创建一个硬件加速窗口，必须和 FULLSCREEN 同时使用。</td>
+</tr>
+<tr>
+<td>pygame.OPENGL</td>
+<td>创建一个 OPENGL 渲染窗口。</td>
+</tr>
+<tr>
+<td>pygame.RESIZABLE</td>
+<td>创建一个可以改变大小的窗口。</td>
+</tr>
+<tr>
+<td>pygame.DOUBLEBUF</td>
+<td>创建一个双缓冲区窗口，建议在 HWSURFACE 或者 OPENGL 时使用。</td>
+</tr>
+<tr>
+<td>pygame.NOFRAME</td>
+<td>创建一个没有边框的窗口。</td>
+</tr>
+<tr>
+<td>pygame.SCALED</td>
+<td>分辨率取决于桌面尺寸和图形比例</td>
+</tr>
+<tr>
+<td>pygame.SHOWN</td>
+<td>窗口以可见模式打开（默认）</td>
+</tr>
+<tr>
+<td>pygame.HIDDEN</td>
+<td>窗口是以隐藏模式打开的</td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>如果vsync参数设置为1，有可能得到一个垂直同步的显示，但不保证能得到一个。该请求只对设置了 pygame.OPENGL 或 pygame.SCALED 标志的 set_mode() 的调用完全有效。</p>
+<p>显示指数0意味着使用默认显示。深度参数将默认为系统的最佳和最快的颜色深度。对于给定的宽度和高度，Pygame 将从 list_modes() 中选择最佳模式。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span><span class="built_in">print</span> (pygame.display.list_modes())</span><br><span class="line">[(<span class="number">1366</span>, <span class="number">768</span>), (<span class="number">1360</span>, <span class="number">768</span>), (<span class="number">1280</span>, <span class="number">768</span>), (<span class="number">1280</span>, <span class="number">720</span>), (<span class="number">1024</span>, <span class="number">768</span>), (<span class="number">800</span>, <span class="number">600</span>), (<span class="number">640</span>, <span class="number">480</span>)]</span><br></pre></td></tr></table></figure>
+<p><strong>pygame.display.mode_ok(</strong> )</p>
+<p>这个函数为一个显示模式挑选最佳颜色深度。它用于确定请求的显示模式是否可用。如果不能设置显示模式，它将返回0。否则，它将返回一个最符合所要求的显示模式的像素深度。</p>
+<p><strong>pygame.display.update(</strong> )</p>
+<p>这个函数将更新整个显示屏的内容。</p>
+<table>
+    <tbody>
+        <tr>
+            <th>
+                方法名称</th>
+            <th>
+                说明</th>
+        </tr>
+        <tr>
+            <td>
+                pygame.display.get_surface()</td>
+            <td>
+                获取当前显示的 Surface 对象。</td>
+        </tr>
+        <tr>
+            <td>
+                pygame.display.flip()</td>
+            <td>
+                更新整个待显示的 Surface 对象到屏幕上。</td>
+        </tr>
+        <tr>
+            <td>
+                pygame.display.update()</td>
+            <td>
+                更新部分软件界面显示。</td>
+        </tr>
+        <tr>
+            <td>
+                pygame.display.Info()</td>
+            <td>
+                产生一个 VideoInfo 对象，包含了显示界面的相关信息。</td>
+        </tr>
+        <tr>
+            <td>
+                pygame.display.set_icon()</td>
+            <td>
+                设置左上角的游戏图标，图标尺寸大小为 32*32。</td>
+        </tr>
+        <tr>
+            <td>
+                pygame.display.iconify()</td>
+            <td>
+                将显示的主窗口即 Surface 对象最小化，或者隐藏。</td>
+        </tr>
+        <tr>
+            <td>
+                pygame.display.get_active()</td>
+            <td>
+                当前显示界面显示在屏幕上时返回 True，如果窗口被隐藏和最小化则返回 False。</td>
+        </tr>
+        <tr>
+            <td>
+                pygame.display.set_caption()</td>
+            <td>
+                设置窗口标题</td>
+        </tr>
+    </tbody>
+</table>
+
+<p>当运行程序后会在电脑桌面上出现一个游戏的主窗口，这个主窗口的本质是一个 surface 对象，把理解为画布、画板、白纸在合适不过了，它相当于一个载体，用于承载一切游戏所用到的元素。假如需要将一段文本方放置到主窗口中，那么需要先创建一个包含文本的 surface 对象，之后再将它附加到主窗口上。简单的理解，就是将一张图 A 粘贴到另一张图 B 上。</p>
+<p>主窗口（screen）相当于游戏程序中尺寸最大的 Surface 对象，在这个最大的“画布”中，我们还可以添加其他“小”的 Surface 对象，这些对象以矩形的形式存在于主窗口中，它们共同组成了一个游戏程序。通过下列方法可以将一个 Surface 对象粘贴至主窗口上：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">scrren.blit(source, dest, area=<span class="literal">None</span>, special_flags = <span class="number">0</span>)</span><br></pre></td></tr></table></figure>
+<div class="note info simple"><ul>
+<li>source：表示要粘贴的 Surface 对象。</li>
+<li>dest：主窗口中的一个标识的坐标位置，可以接受一个 (x,y) 元组，或者 (x,y,width,height) 元组，也可以是一个 Rect 对象；</li>
+<li>area：接受一个 Rect 对象，默认为 None，如果提供该参数则相当于抠图操作，即在屏幕的指定区域显示想要的内容；</li>
+<li>special_flags：可选参数，它是 Pygame.1.8 版本新增的功能，用于指定对应位置颜色的混合方式，参数值有 BLEND_RGBA_ADD、BLEND_SUB 等。如果不提供该参数的情况下，默认使用 source 的颜色覆盖 screen 的颜色。</li>
+</ul>
+</div>
+<h2 id="Pygame-Surface创建图像"><a href="#Pygame-Surface创建图像" class="headerlink" title="Pygame Surface创建图像"></a>Pygame Surface创建图像</h2><p>Pygame 针对文本、图像、颜色提供了不同模块来生成它们各自的 Surface 对象。Surface 模块是Pygame 中专门用来新建图像的，通过该模块可以创建一个 Surface 对象，语法格式如下：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Surface=pygame.Surface(size=(width,height),flags,depth)</span><br></pre></td></tr></table></figure>
+<p>参数函数如下：</p>
+<ul>
+<li>size：表示 Surface 对象的矩形区域大小；</li>
+<li>flags：功能标志位，有两个可选参数值 HWSURFACE 和 SPCALPHA，前者代表将创建的 Surface 对象存放于显存中，后者表示让图像的每一个像素都包含一个 alpha 通道</li>
+<li>depth：指定像素的颜色深度，默认为自适应模式，由 Pygame 自动调节。</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> sys</span><br><span class="line"><span class="keyword">import</span> pygame</span><br><span class="line"><span class="comment">#使用pygame之前必须初始化</span></span><br><span class="line">pygame.init()</span><br><span class="line"><span class="comment">#设置主屏窗口 ；设置全屏格式：flags=pygame.FULLSCREEN</span></span><br><span class="line">screen = pygame.display.set_mode((<span class="number">400</span>,<span class="number">400</span>))</span><br><span class="line"><span class="comment">#设置窗口标题</span></span><br><span class="line">pygame.display.set_caption(<span class="string">&#x27;bingbing&#x27;</span>)</span><br><span class="line">screen.fill(<span class="string">&#x27;white&#x27;</span>)</span><br><span class="line"><span class="comment">#创建一个 50*50 的图像,并优化显示</span></span><br><span class="line">face = pygame.Surface((<span class="number">50</span>,<span class="number">50</span>),flags=pygame.HWSURFACE)</span><br><span class="line"><span class="comment">#填充颜色</span></span><br><span class="line">face.fill(color=<span class="string">&#x27;pink&#x27;</span>)</span><br><span class="line"><span class="keyword">while</span> <span class="literal">True</span>:</span><br><span class="line">    <span class="comment"># 循环获取事件，监听事件</span></span><br><span class="line">    <span class="keyword">for</span> event <span class="keyword">in</span> pygame.event.get():</span><br><span class="line">        <span class="comment"># 判断用户是否点了关闭按钮</span></span><br><span class="line">        <span class="keyword">if</span> event.<span class="built_in">type</span> == pygame.QUIT:</span><br><span class="line">            <span class="comment">#卸载所有模块</span></span><br><span class="line">            pygame.quit()</span><br><span class="line">            <span class="comment">#终止程序</span></span><br><span class="line">            sys.exit()</span><br><span class="line">    <span class="comment"># 将绘制的图像添加到主屏幕上，(100,100)是位置坐标，显示屏的左上角为坐标系的(0,0)原点</span></span><br><span class="line">    screen.blit(face, (<span class="number">100</span>, <span class="number">100</span>))</span><br><span class="line">    pygame.display.flip() <span class="comment">#更新屏幕内容</span></span><br></pre></td></tr></table></figure>
+<p>从上述运行结果可以看出，通过 Surface 模块，我们成功的在主屏幕上绘制一个 50 * 50 的矩形区域。注意，如果不设置尺寸，Surface 默认创建一个和主游戏屏幕同样大小的区域。</p>
+<table>
+    <tbody>
+        <tr>
+            <th>
+                方法</th>
+            <th>
+                说明</th>
+        </tr>
+        <tr>
+            <td>
+                pygame.Surface.blit()&nbsp;</td>
+            <td>
+                将一个图像（Surface 对象）绘制到另一个图像上</td>
+        </tr>
+        <tr>
+            <td>
+                pygame.Surface.convert()&nbsp;</td>
+            <td>
+                修改图像（Surface 对象）的像素格式</td>
+        </tr>
+        <tr>
+            <td>
+                pygame.Surface.fill()&nbsp;&nbsp;</td>
+            <td>
+                使用纯色填充 Surface 对象</td>
+        </tr>
+        <tr>
+            <td>
+                pygame.Surface.scroll()&nbsp;</td>
+            <td>
+                复制并移动 Surface 对象</td>
+        </tr>
+        <tr>
+            <td>
+                pygame.Surface.set_alpha()&nbsp;</td>
+            <td>
+                设置整个图像的透明度</td>
+        </tr>
+        <tr>
+            <td>
+                pygame.Surface.get_at()&nbsp;</td>
+            <td>
+                获取一个像素的颜色值</td>
+        </tr>
+        <tr>
+            <td>
+                pygame.Surface.set_at()&nbsp;</td>
+            <td>
+                设置一个像素的颜色值</td>
+        </tr>
+        <tr>
+            <td>
+                pygame.Surface.get_palette()</td>
+            <td>
+                获取 Surface 对象 8 位索引的调色板</td>
+        </tr>
+        <tr>
+            <td>
+                pygame.Surface.map_rgb()&nbsp;&nbsp;</td>
+            <td>
+                将一个 RGBA 颜色转换为映射的颜色值</td>
+        </tr>
+        <tr>
+            <td>
+                pygame.Surface.set_clip()&nbsp;</td>
+            <td>
+                设置该 Surface 对象的当前剪切区域</td>
+        </tr>
+        <tr>
+            <td>
+                pygame.Surface.subsurface()&nbsp;&nbsp;</td>
+            <td>
+                根据父对象创建一个新的子 Surface 对象</td>
+        </tr>
+        <tr>
+            <td>
+                pygame.Surface.get_offset()</td>
+            <td>
+                获取子 Surface 对象在父对象中的偏移位置</td>
+        </tr>
+        <tr>
+            <td>
+                pygame.Surface.get_size()</td>
+            <td>
+                获取 Surface 对象的尺寸</td>
+        </tr>
+    </tbody>
+</table>
+
+<p>除了使用 Surface 模块新建图像外，我们还可以使用另外一种方法从外部加载图像，如下所示：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pygame.image.load(&quot;图片路径&quot;).convert()  </span><br></pre></td></tr></table></figure>
+<p>上述方法将被加载的图像作为 Surface 对象来使用，因此它可以调用上述表格中所有方法。注意，此处之所以使用 convert(）来转换被加载图片的像素格式，是为了提升 Pygame 对图片的处理速度，该操作能够保证图像的像素格式与图片的显示格式是相同的。</p>
+<p><strong>通过 image.load() 方法可以加载游戏的背景图，或者游戏中使用的其他元素，比如的人物、道具等等。</strong></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> pygame</span><br><span class="line"><span class="comment">#引入pygame中所有常量，比如 QUIT</span></span><br><span class="line"><span class="keyword">from</span> pygame.<span class="built_in">locals</span> <span class="keyword">import</span> *</span><br><span class="line">pygame.init()</span><br><span class="line">screen = pygame.display.set_mode((<span class="number">500</span>,<span class="number">250</span>))</span><br><span class="line">pygame.display.set_caption(<span class="string">&#x27;bingbing&#x27;</span>)</span><br><span class="line"><span class="comment">#加载一张图片</span></span><br><span class="line">image_surface = pygame.image.load(<span class="string">&quot;C:/Users/Administrator/Desktop/c-net.png&quot;</span>).convert()</span><br><span class="line"><span class="comment"># rect(left,top,width,height)指定图片上某个区域</span></span><br><span class="line"><span class="comment"># special_flags功能标志位,指定颜色混合模式，默认为 0 表示用纯色填充</span></span><br><span class="line">image_surface.fill((<span class="number">0</span>,<span class="number">0</span>,<span class="number">255</span>),rect=(<span class="number">100</span>,<span class="number">100</span>,<span class="number">100</span>,<span class="number">50</span>),special_flags=<span class="number">0</span>)</span><br><span class="line"><span class="comment"># 200,100 表示图像在水平、垂直方向上的偏移量，以左上角为坐标原点</span></span><br><span class="line">image_surface.scroll(<span class="number">100</span>,<span class="number">50</span>)</span><br><span class="line"><span class="comment"># 无限循环，让窗口停留</span></span><br><span class="line"><span class="keyword">while</span> <span class="literal">True</span>:</span><br><span class="line">    <span class="keyword">for</span> event <span class="keyword">in</span> pygame.event.get():</span><br><span class="line">        <span class="keyword">if</span> event.<span class="built_in">type</span> == QUIT:</span><br><span class="line">            exit()</span><br><span class="line">    <span class="comment"># 将图像放置在主屏幕上</span></span><br><span class="line">    screen.blit(image_surface,(<span class="number">0</span>,<span class="number">0</span>))</span><br><span class="line">    pygame.display.update()</span><br></pre></td></tr></table></figure>
+<h2 id="Pygame-Transform图像变形"><a href="#Pygame-Transform图像变形" class="headerlink" title="Pygame Transform图像变形"></a>Pygame Transform图像变形</h2><p>pygame.transform 模块允许您对加载、创建后的图像进行一系列操作，比如调整图像大小、旋转图片等操作，常用方法如下所示：</p>
+<table>
+    <tbody>
+        <tr>
+            <th>
+                方法</th>
+            <th>
+                说明</th>
+        </tr>
+        <tr>
+            <td>
+                pygame.transform.scale()</td>
+            <td>
+                将图片缩放至指定的大小，并返回一个新的 Surface 对象。</td>
+        </tr>
+        <tr>
+            <td>
+                pygame.transform.rotate()</td>
+            <td>
+                将图片旋转至指定的角度。</td>
+        </tr>
+        <tr>
+            <td>
+                pygame.transform.rotozoom()</td>
+            <td>
+                以角度旋转图像，同时将图像缩小或放大至指定的倍数。</td>
+        </tr>
+    </tbody>
+</table>
+
+<p>示例：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> pygame</span><br><span class="line"><span class="comment">#引入pygame中所有常量，比如 QUIT</span></span><br><span class="line"><span class="keyword">from</span> pygame.<span class="built_in">locals</span> <span class="keyword">import</span> *</span><br><span class="line"></span><br><span class="line">pygame.init()</span><br><span class="line">screen = pygame.display.set_mode((<span class="number">500</span>,<span class="number">250</span>))</span><br><span class="line">pygame.display.set_caption(<span class="string">&#x27;bingbing&#x27;</span>)</span><br><span class="line"><span class="comment">#加载一张图片（455*191)</span></span><br><span class="line">image_surface = pygame.image.load(<span class="string">&quot;C:/Users/Administrator/Desktop/c-net.png&quot;</span>).convert()</span><br><span class="line">image_new = pygame.transform.scale(image_surface,(<span class="number">300</span>,<span class="number">300</span>))</span><br><span class="line"><span class="comment"># 查看新生成的图片的对象类型</span></span><br><span class="line"><span class="comment">#print(type(image_new))</span></span><br><span class="line"><span class="comment"># 对新生成的图像进行旋转至45度</span></span><br><span class="line">image_1 =pygame.transform.rotate(image_new,<span class="number">45</span>)</span><br><span class="line"><span class="comment"># 使用rotozoom() 旋转 0 度，将图像缩小0.5倍</span></span><br><span class="line">image_2 = pygame.transform.rotozoom(image_1,<span class="number">0</span>,<span class="number">0.5</span>)</span><br><span class="line"></span><br><span class="line"><span class="keyword">while</span> <span class="literal">True</span>:</span><br><span class="line">    <span class="keyword">for</span> event <span class="keyword">in</span> pygame.event.get():</span><br><span class="line">        <span class="keyword">if</span> event.<span class="built_in">type</span> == QUIT:</span><br><span class="line">            exit()</span><br><span class="line">    <span class="comment"># 将最后生成的image_2添加到显示屏幕上</span></span><br><span class="line">    screen.blit(image_2,(<span class="number">0</span>,<span class="number">0</span>))</span><br><span class="line">    pygame.display.update()</span><br></pre></td></tr></table></figure>
+<h2 id="Pygame-Time时间控制详解"><a href="#Pygame-Time时间控制详解" class="headerlink" title="Pygame Time时间控制详解"></a>Pygame Time时间控制详解</h2><p>pygame.time 时间控制模块，是 Pygame 中使用频率较高的模块，其主要功能是管理时间和游戏帧数率（即 FPS）。</p>
+<p>时间在游戏开发中承担着非常重要的作用，比如释放某个技能所消耗的时间，或者播放动画、声音的持续时间，这些都需要时间来管理。time 模块另外一个重要作用是控制游戏帧数率（即 FPS），它是评价游戏画面是否流畅的关键指标。在一般情况下，计算机的 FPS 都能达到 60帧/s 的速度，这足够我们使用，如果当帧数小于 30 的时候，游戏画面就会变得卡顿。</p>
+<h4 id="1-游戏暂停"><a href="#1-游戏暂停" class="headerlink" title="1) 游戏暂停"></a>1) 游戏暂停</h4><p>Pygame.time 模块提供了以下常用方法，如下表所示：</p>
+<table>
+    <tbody>
+        <tr>
+            <th>
+                方法</th>
+            <th>
+                说明</th>
+        </tr>
+        <tr>
+            <td>
+                pygame.time.get_ticks()&nbsp;</td>
+            <td>
+                以毫秒为单位获取时间</td>
+        </tr>
+        <tr>
+            <td>
+                pygame.time.wait()</td>
+            <td>
+                使程序暂停一段时间</td>
+        </tr>
+        <tr>
+            <td>
+                pygame.time.set_timer()</td>
+            <td>
+                创建一个定时器，即每隔一段时间，去执行一些动作</td>
+        </tr>
+        <tr>
+            <td>
+                pygame.time.Clock()</td>
+            <td>
+                创建一个时钟对象来帮我们确定游戏要以多大的帧数运行</td>
+        </tr>
+    </tbody>
+</table>
+
+<h4 id="2-设置游戏FPS"><a href="#2-设置游戏FPS" class="headerlink" title="2) 设置游戏FPS"></a>2) 设置游戏FPS</h4><p>若想设置游戏的帧数率（FPS）可以通过 Clock() 方法来实现，该对象提供了以下常用方法：</p>
+<table>
+    <tbody>
+        <tr>
+            <th>
+                方法</th>
+            <th>
+                说明</th>
+        </tr>
+        <tr>
+            <td>
+                pygame.time.Clock.tick()</td>
+            <td>
+                更新clock对象</td>
+        </tr>
+        <tr>
+            <td>
+                pygame.time.Clock.get_time()</td>
+            <td>
+                获取上一个tick中的时间</td>
+        </tr>
+        <tr>
+            <td>
+                pygame.time.Clock.get_fps()</td>
+            <td>
+                计算clock对象的帧率</td>
+        </tr>
+    </tbody>
+</table>
+
+<p>示例：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> pygame</span><br><span class="line"></span><br><span class="line">pygame.init()</span><br><span class="line">screen = pygame.display.set_mode((<span class="number">500</span>,<span class="number">300</span>))</span><br><span class="line">pygame.display.set_caption(<span class="string">&#x27;bingbing&#x27;</span>)</span><br><span class="line"><span class="comment"># 获取以毫秒为单位的时间</span></span><br><span class="line">t = pygame.time.get_ticks() <span class="comment">#该时间指的从pygame初始化后开始计算，到调用该函数为止</span></span><br><span class="line">t1 =pygame.time.delay(<span class="number">3000</span>) <span class="comment">#暂停游戏3000毫秒</span></span><br><span class="line"><span class="built_in">print</span>(t1)</span><br><span class="line"><span class="comment">#暂停t1时间后，加载图片</span></span><br><span class="line">image_surface = pygame.image.load(<span class="string">&quot;C:/Users/Administrator/Desktop/c-net.png&quot;</span>)</span><br><span class="line"><span class="comment">#创建时钟对象（控制游戏的FPS）</span></span><br><span class="line">clock = pygame.time.Clock()</span><br><span class="line"><span class="keyword">while</span> <span class="literal">True</span>:</span><br><span class="line"></span><br><span class="line">    <span class="comment">#通过时钟对象，指定循环频率，每秒循环60次</span></span><br><span class="line">    clock.tick(<span class="number">60</span>)</span><br><span class="line">    <span class="keyword">for</span> event <span class="keyword">in</span> pygame.event.get():</span><br><span class="line">        <span class="keyword">if</span> event.<span class="built_in">type</span> == pygame.QUIT:</span><br><span class="line">            exit()</span><br><span class="line">    screen.blit(image_surface,(<span class="number">0</span>,<span class="number">0</span>))</span><br><span class="line">    pygame.display.update()</span><br></pre></td></tr></table></figure>
+<h2 id="Pygame-Rect区域位置"><a href="#Pygame-Rect区域位置" class="headerlink" title="Pygame Rect区域位置"></a>Pygame Rect区域位置</h2><p>Rect（rectangle）指的是矩形，或者长方形，在 Pygame 中我们使用 Rect() 方法来创建一个指定位置，大小的矩形区域。函数的语法格式如下：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">rect =pygame.Rect(left,top,width,height) </span><br></pre></td></tr></table></figure>
+<p>Rect 表示的区域必须位于一个 Surface 对象之上，比如游戏的主窗口（screen）。</p>
+<p><img src="https://c.biancheng.net/uploads/allimg/211109/1111164644-0.gif" alt="pygame Rect区域"></p>
+<div class="note info simple"><p>注意：在 Pygame 中以游戏主窗口的左上角为坐标原点。</p>
+</div>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> pygame</span><br><span class="line">pygame.init()</span><br><span class="line">screen = pygame.display.set_mode((<span class="number">500</span>,<span class="number">300</span>))</span><br><span class="line">pygame.display.set_caption(<span class="string">&#x27;bingbing&#x27;</span>)</span><br><span class="line">image_surface = pygame.image.load(<span class="string">&quot;C:/Users/Administrator/Desktop/c-net.png&quot;</span>)</span><br><span class="line">rect1 = pygame.Rect(<span class="number">50</span>,<span class="number">50</span>,<span class="number">100</span>,<span class="number">100</span>)</span><br><span class="line"><span class="comment"># 在原图的基础上创建一个新的子图（surface对象）</span></span><br><span class="line">image_child= image_surface.subsurface(rect1)</span><br><span class="line">rect2 = image_child.get_rect()</span><br><span class="line"><span class="comment">#输出的矩形大小为 100*100</span></span><br><span class="line"><span class="built_in">print</span>(rect2)</span><br><span class="line"><span class="keyword">while</span> <span class="literal">True</span>:</span><br><span class="line">    <span class="keyword">for</span> event <span class="keyword">in</span> pygame.event.get():</span><br><span class="line">        <span class="keyword">if</span> event.<span class="built_in">type</span> == pygame.QUIT:</span><br><span class="line">            exit()</span><br><span class="line">    <span class="comment">#在屏幕上显示子图的区域</span></span><br><span class="line">    screen.blit(image_child,rect1)</span><br><span class="line">    pygame.display.update()</span><br></pre></td></tr></table></figure>
+<p>我们在图片上截取了一个和 rect1 同样大小的矩形区域（100*100）</p>
+<p>Rect提供了其他方法：</p>
+<table>
+    <tbody>
+        <tr>
+            <th>
+                方法</th>
+            <th>
+                说明</th>
+        </tr>
+        <tr>
+            <td>
+                pygame.Rect.copy()</td>
+            <td>
+                复制矩形</td>
+        </tr>
+        <tr>
+            <td>
+                pygame.Rect.move()</td>
+            <td>
+                移动矩形区域，接受一个列表参数</td>
+        </tr>
+        <tr>
+            <td>
+                pygame.Rect.move_ip()</td>
+            <td>
+                移动矩形（无返回）</td>
+        </tr>
+        <tr>
+            <td>
+                pygame.Rect.inflate()</td>
+            <td>
+                增大或缩小矩形大小</td>
+        </tr>
+        <tr>
+            <td>
+                pygame.Rect.clamp()</td>
+            <td>
+                将矩形移到另一个矩形内</td>
+        </tr>
+        <tr>
+            <td>
+                pygame.Rect.union()</td>
+            <td>
+                返回一个两个矩形合并后的矩形。</td>
+        </tr>
+        <tr>
+            <td>
+                pygame.Rect.fit()</td>
+            <td>
+                按纵横比调整矩形的大小或移动矩形。</td>
+        </tr>
+        <tr>
+            <td>
+                pygame.Rect.contains()</td>
+            <td>
+                测试一个矩形是否在另一个矩形内</td>
+        </tr>
+        <tr>
+            <td>
+                pygame.Rect.collidepoint()&nbsp;</td>
+            <td>
+                测试点是否在矩形内</td>
+        </tr>
+        <tr>
+            <td>
+                pygame.Rect.colliderect()</td>
+            <td>
+                测试两个矩形是否重叠</td>
+        </tr>
+    </tbody>
+</table>
+
+<div class="note info simple"><p>同时 Rect 对象也提供了一些关于矩形大小的常用的属性，如下所示：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">x,y  <span class="comment">#表示矩形距离 x、y 轴的距离</span></span><br><span class="line">top, left, bottom, right <span class="comment">#在坐标系内描述矩形的大小</span></span><br><span class="line">topleft, bottomleft, topright, bottomright <span class="comment">#返回一个描述矩形大小的元组</span></span><br><span class="line">midtop, midleft, midbottom, midright <span class="comment">#返回一个描述矩形大小的元组</span></span><br><span class="line">center, centerx, centery <span class="comment">#(centerx，centery)表示矩形中央坐标(x,y)的值</span></span><br><span class="line">size, width, height</span><br><span class="line">w,h  <span class="comment">#用于描述矩形的width、height</span></span><br></pre></td></tr></table></figure>
+<p>简单示例：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span>  pygame</span><br><span class="line"><span class="comment"># 对应left/top/width/height</span></span><br><span class="line">rect1 = pygame.Rect(<span class="number">0</span>,<span class="number">0</span>,<span class="number">100</span>,<span class="number">100</span>)</span><br><span class="line"><span class="built_in">print</span>(<span class="string">&#x27;x的值是&#123;&#125;；y的值是&#123;&#125;&#x27;</span>.<span class="built_in">format</span>(rect1.x,rect1.y))</span><br><span class="line"><span class="built_in">print</span>(<span class="string">&#x27;bottom的值是&#123;&#125;；right的值是&#123;&#125;&#x27;</span>.<span class="built_in">format</span>(rect1.bottom,rect1.right))</span><br><span class="line"><span class="comment"># 设置居中的距离</span></span><br><span class="line"><span class="built_in">print</span>(rect1.center,rect1.centerx,rect1.centery)</span><br><span class="line"><span class="comment"># 返回值为 (centerx,top)</span></span><br><span class="line"><span class="built_in">print</span>(rect1.midtop)</span><br><span class="line"><span class="comment"># 返回值为 (right,centery)的元组</span></span><br><span class="line"><span class="built_in">print</span>(rect1.midright)</span><br><span class="line"><span class="comment"># 返回值为（left,bottom）</span></span><br><span class="line"><span class="built_in">print</span>(rect1.bottomleft)</span><br><span class="line"><span class="comment"># 返回矩形区域大小，元组格式</span></span><br><span class="line"><span class="built_in">print</span>(rect1.size)</span><br></pre></td></tr></table></figure>
+<p>输出结果如下：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">x的值是<span class="number">0</span>；y的值是<span class="number">0</span></span><br><span class="line">bottom的值是<span class="number">100</span>；right的值是<span class="number">100</span></span><br><span class="line"><span class="comment">#中心</span></span><br><span class="line">(<span class="number">50</span>, <span class="number">50</span>) <span class="number">50</span> <span class="number">50</span></span><br><span class="line">(<span class="number">50</span>, <span class="number">0</span>)</span><br><span class="line"><span class="comment">#midright</span></span><br><span class="line">(<span class="number">100</span>, <span class="number">50</span>)</span><br><span class="line"><span class="comment">#bottomleft</span></span><br><span class="line">(<span class="number">0</span>, <span class="number">100</span>)</span><br><span class="line"><span class="comment">#size</span></span><br><span class="line">(<span class="number">100</span>, <span class="number">100</span>)</span><br></pre></td></tr></table></figure>
+</div>
+<p>我们还可以通过属性对来设置，或者者更改矩形区域的大小，如下所示：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">rect1.left = 30 rect1.center = (70,70)</span><br></pre></td></tr></table></figure>
+<p>除了通过 Rect 对象来构造一个矩形区域之外，我们还可以使用<code>rect</code>属性来构建一个矩形区域。在 Pygame 中有许多函数都提供了<code>rect</code>属性，比如有下列函数：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">surface.fill((0,0,255),rect=(100,100,100,50))</span><br></pre></td></tr></table></figure>
+<p>上述代码会在 surface 对象的区域内选定一个 rect 区域，并将该区域填充为蓝色（RGB(0,0,255)）。</p>
+<h2 id="Pygame-Event"><a href="#Pygame-Event" class="headerlink" title="Pygame Event"></a>Pygame Event</h2></article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta"><i class="fas fa-circle-user fa-fw"></i>文章作者: </span><span class="post-copyright-info"><a href="https://stack2005.github.io">Stack</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta"><i class="fas fa-square-arrow-up-right fa-fw"></i>文章链接: </span><span class="post-copyright-info"><a href="https://stack2005.github.io/posts/5c903a76.html">https://stack2005.github.io/posts/5c903a76.html</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta"><i class="fas fa-circle-exclamation fa-fw"></i>版权声明: </span><span class="post-copyright-info">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a> 许可协议。转载请注明来源 <a href="https://stack2005.github.io" target="_blank">Stack's Blog</a>！</span></div></div><div class="tag_share"><div class="post-meta__tag-list"><a class="post-meta__tags" href="/tags/python/">python</a></div><div class="post-share"><div class="social-share" data-image="https://bu.dusays.com/2025/03/05/67c7b6b93c7db.jpg" data-sites="facebook,twitter,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/css/share.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/js/social-share.min.js" defer></script></div></div><nav class="pagination-post" id="pagination"><a class="pagination-related full-width" href="/posts/f7c1b6ea.html" title="MAkefile简单学习"><img class="cover" src="https://bu.dusays.com/2025/03/03/67c58e7f686c7.jpg" onerror="onerror=null;src='/img/404.jpg'" alt="cover of previous post"><div class="info"><div class="info-1"><div class="info-item-1">上一篇</div><div class="info-item-2">MAkefile简单学习</div></div><div class="info-2"><div class="info-item-1">make简单使用，非深度学习</div></div></div></a></nav></div><div class="aside-content" id="aside-content"><div class="card-widget card-info text-center"><div class="avatar-img"><img src="https://bu.dusays.com/2025/02/28/67c1a8c0f366f.jpg" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="author-info-name">Stack</div><div class="author-info-description">The spreading wide of narrow hands To gather paradise-</div><div class="site-data"><a href="/archives/"><div class="headline">文章</div><div class="length-num">18</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">12</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">6</div></a></div><a id="card-info-btn" target="_blank" rel="noopener" href="https://github.com/stack2005"><i class="fab fa-github"></i><span>Follow Me</span></a><div class="card-info-social-icons"><a class="social-icon faa-parent animated-hover" href="https://github.com/stack2005" target="_blank" title="Github"><svg class="icon faa-tada" aria-hidden="true"><use xlink:href="#icon-gitHub"></use></svg></a><a class="social-icon faa-parent animated-hover" href="https://mail.qq.com/cgi-bin/frame_html?sid=l4gKQQ8P1yadmBdw&amp;r=4b212fe917e61ea2adbefd583dff0c56&amp;lang=zh" target="_blank" title="Email"><svg class="icon faa-tada" aria-hidden="true"><use xlink:href="#icon-youxiang"></use></svg></a><a class="social-icon faa-parent animated-hover" href="/atom.xml" target="_blank" title="RSS"><svg class="icon faa-tada" aria-hidden="true"><use xlink:href="#icon-rss"></use></svg></a><a class="social-icon faa-parent animated-hover" href="https://space.bilibili.com/392208387" target="_blank" title="BiliBili"><svg class="icon faa-tada" aria-hidden="true"><use xlink:href="#icon-bilibili"></use></svg></a><a class="social-icon faa-parent animated-hover" href="tencent://Message/?Uin=2414956063&amp;amp;websiteName=local.edu.com:8888=&amp;amp;Menu=yes" target="_blank" title="QQ"><svg class="icon faa-tada" aria-hidden="true"><use xlink:href="#icon-QQ1"></use></svg></a></div></div><div class="card-widget card-announcement"><div class="item-headline"><i class="fas fa-bullhorn fa-shake"></i><span>公告</span></div><div class="announcement_content">This is my Blog</div></div><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="fas fa-stream"></i><span>目录</span><span class="toc-percentage"></span></div><div class="toc-content"><ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#pygame-%E5%AE%89%E8%A3%85"><span class="toc-number">1.</span> <span class="toc-text">pygame 安装</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%AC%AC%E4%B8%80%E4%B8%AApygame"><span class="toc-number">2.</span> <span class="toc-text">第一个pygame</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%88%9D%E5%A7%8B%E5%8C%96%E7%A8%8B%E5%BA%8F"><span class="toc-number">2.1.</span> <span class="toc-text">初始化程序</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%88%9B%E5%BB%BASurface%E5%AF%B9%E8%B1%A1"><span class="toc-number">2.2.</span> <span class="toc-text">创建Surface对象</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BA%8B%E4%BB%B6%E7%9B%91%E5%90%AC"><span class="toc-number">2.3.</span> <span class="toc-text">事件监听</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%B8%B8%E6%88%8F%E5%BE%AA%E7%8E%AF"><span class="toc-number">2.4.</span> <span class="toc-text">游戏循环</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Display%E6%98%BE%E7%A4%BA%E6%A8%A1%E5%9D%97"><span class="toc-number">3.</span> <span class="toc-text">Display显示模块</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Pygame-Surface%E5%88%9B%E5%BB%BA%E5%9B%BE%E5%83%8F"><span class="toc-number">4.</span> <span class="toc-text">Pygame Surface创建图像</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Pygame-Transform%E5%9B%BE%E5%83%8F%E5%8F%98%E5%BD%A2"><span class="toc-number">5.</span> <span class="toc-text">Pygame Transform图像变形</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Pygame-Time%E6%97%B6%E9%97%B4%E6%8E%A7%E5%88%B6%E8%AF%A6%E8%A7%A3"><span class="toc-number">6.</span> <span class="toc-text">Pygame Time时间控制详解</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#1-%E6%B8%B8%E6%88%8F%E6%9A%82%E5%81%9C"><span class="toc-number">6.0.1.</span> <span class="toc-text">1) 游戏暂停</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#2-%E8%AE%BE%E7%BD%AE%E6%B8%B8%E6%88%8FFPS"><span class="toc-number">6.0.2.</span> <span class="toc-text">2) 设置游戏FPS</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Pygame-Rect%E5%8C%BA%E5%9F%9F%E4%BD%8D%E7%BD%AE"><span class="toc-number">7.</span> <span class="toc-text">Pygame Rect区域位置</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Pygame-Event"><span class="toc-number">8.</span> <span class="toc-text">Pygame Event</span></a></li></ol></div></div><div class="card-widget card-recent-post"><div class="item-headline"><i class="fas fa-history"></i><span>最新文章</span></div><div class="aside-list"><div class="aside-list-item"><a class="thumbnail" href="/posts/5c903a76.html" title="pygame学习"><img src="https://bu.dusays.com/2025/03/05/67c7b6b93c7db.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="pygame学习"/></a><div class="content"><a class="title" href="/posts/5c903a76.html" title="pygame学习">pygame学习</a><time datetime="2025-04-17T16:00:00.000Z" title="发表于 2025-04-18 00:00:00">2025-04-18</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/posts/f7c1b6ea.html" title="MAkefile简单学习"><img src="https://bu.dusays.com/2025/03/03/67c58e7f686c7.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="MAkefile简单学习"/></a><div class="content"><a class="title" href="/posts/f7c1b6ea.html" title="MAkefile简单学习">MAkefile简单学习</a><time datetime="2025-04-14T16:00:00.000Z" title="发表于 2025-04-15 00:00:00">2025-04-15</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/posts/d561c4d0.html" title="虚言本为护心栽，怎奈真情难自埋：从友夕线看范乃秋晴如何把握人物和剧情"><img src="https://bu.dusays.com/2025/04/10/67f7cb10bd123.png" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="虚言本为护心栽，怎奈真情难自埋：从友夕线看范乃秋晴如何把握人物和剧情"/></a><div class="content"><a class="title" href="/posts/d561c4d0.html" title="虚言本为护心栽，怎奈真情难自埋：从友夕线看范乃秋晴如何把握人物和剧情">虚言本为护心栽，怎奈真情难自埋：从友夕线看范乃秋晴如何把握人物和剧情</a><time datetime="2025-04-09T16:00:00.000Z" title="发表于 2025-04-10 00:00:00">2025-04-10</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/posts/d267c650.html" title="SQL中的1=0"><img src="https://bu.dusays.com/2025/04/03/67ee48f892b85.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="SQL中的1=0"/></a><div class="content"><a class="title" href="/posts/d267c650.html" title="SQL中的1=0">SQL中的1=0</a><time datetime="2025-04-02T16:00:00.000Z" title="发表于 2025-04-03 00:00:00">2025-04-03</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/posts/e51df790.html" title="抛弃DockerDesktop，拥抱原生Docker"><img src="https://bu.dusays.com/2025/02/28/67c1ae3b2076e.png" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="抛弃DockerDesktop，拥抱原生Docker"/></a><div class="content"><a class="title" href="/posts/e51df790.html" title="抛弃DockerDesktop，拥抱原生Docker">抛弃DockerDesktop，拥抱原生Docker</a><time datetime="2025-03-17T16:00:00.000Z" title="发表于 2025-03-18 00:00:00">2025-03-18</time></div></div></div></div></div></div></main><footer id="footer"><div id="footer-wrap"><div class="copyright">&copy;2025 By Stack</div><div class="framework-info"><span>框架 </span><a target="_blank" rel="noopener" href="https://hexo.io">Hexo 7.3.0</a><span class="footer-separator">|</span><span>主题 </span><a target="_blank" rel="noopener" href="https://github.com/jerryc127/hexo-theme-butterfly">Butterfly 5.3.3</a></div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="阅读模式"><i class="fas fa-book-open"></i></button><button id="translateLink" type="button" title="简繁转换">繁</button><button id="darkmode" type="button" title="日间和夜间模式切换"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside-config" type="button" title="设置"><i class="fas fa-cog fa-spin"></i></button><button class="close" id="mobile-toc-button" type="button" title="目录"><i class="fas fa-list-ul"></i></button><button id="go-up" type="button" title="回到顶部"><span class="scroll-percent"></span><i class="fas fa-arrow-up"></i></button></div></div><div><script src="/js/utils.js"></script><script src="/js/main.js"></script><script src="/js/tw_cn.js"></script><script src="https://cdn.jsdelivr.net/npm/medium-zoom/dist/medium-zoom.min.js"></script><div class="js-pjax"></div><div class="aplayer no-destroy" data-id="2954824359" data-server="netease" data-type="playlist"   data-order="list" data-fixed="true" data-preload="auto" data-autoplay="false" data-mutex="true" ></div><script defer src="/js/cursor.js"></script><script defer src="/js/title.js"></script><script id="click-heart" src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/dist/click-heart.min.js" async="async" mobile="ture"></script><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/aplayer/dist/APlayer.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/aplayer/dist/APlayer.min.js"></script><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/metingjs/dist/Meting.min.js"></script><div class="app-refresh" id="app-refresh" style="position: fixed;top: -2.2rem;left: 0;right: 0;z-index: 99999;padding: 0 1rem;font-size: 15px;height: 2.2rem;transition: all 0.3s ease;"><div class="app-refresh-wrap" style=" display: flex;color: #fff;height: 100%;align-items: center;justify-content: center;"><label>✨ 有新文章啦！ 👉</label><a href="javascript:void(0)" onclick="location.reload()"><span style="color: #fff;text-decoration: underline;cursor: pointer;">🍗点击食用🍔</span></a></div></div><script>if ('serviceWorker' in navigator) {
+if (navigator.serviceWorker.controller) {
+navigator.serviceWorker.addEventListener('controllerchange', function() {
+showNotification()
+})
+}
+window.addEventListener('load', function() {
+navigator.serviceWorker.register('/sw.js')
+})
+}
+function showNotification() {
+if (GLOBAL_CONFIG.Snackbar) {
+var snackbarBg =
+document.documentElement.getAttribute('data-theme') === 'light' ?
+GLOBAL_CONFIG.Snackbar.bgLight :
+GLOBAL_CONFIG.Snackbar.bgDark
+var snackbarPos = GLOBAL_CONFIG.Snackbar.position
+Snackbar.show({
+text: '✨ 有新文章啦！ 👉',
+backgroundColor: snackbarBg,
+duration: 500000,
+pos: snackbarPos,
+actionText: '🍗点击食用🍔',
+actionTextColor: '#fff',
+onActionClick: function(e) {
+location.reload()
+},
+})
+} else {
+var showBg =
+document.documentElement.getAttribute('data-theme') === 'light' ?
+'#3b70fc' :
+'#1f1f1f'
+var cssText = `top: 0; background: ${showBg};`
+document.getElementById('app-refresh').style.cssText = cssText
+}
+}</script><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script><div id="local-search"><div class="search-dialog"><nav class="search-nav"><span class="search-dialog-title">搜索</span><span id="loading-status"></span><button class="search-close-button"><i class="fas fa-times"></i></button></nav><div class="text-center" id="loading-database"><i class="fas fa-spinner fa-pulse"></i><span>  数据加载中</span></div><div class="search-wrap"><div id="local-search-input"><div class="local-search-box"><input class="local-search-box--input" placeholder="搜索文章" type="text"/></div></div><hr/><div id="local-search-results"></div><div id="local-search-stats-wrap"></div></div></div><div id="search-mask"></div><script src="/js/search/local-search.js"></script></div></div><!-- hexo injector body_end start --><script data-pjax>
+    function butterfly_categories_card_injector_config(){
+      var parent_div_git = document.getElementById('recent-posts');
+      var item_html = '<style>li.categoryBar-list-item{width:32.3%;}.categoryBar-list{max-height: 190px;overflow:auto;}.categoryBar-list::-webkit-scrollbar{width:0!important}@media screen and (max-width: 650px){.categoryBar-list{max-height: 160px;}}</style><div class="recent-post-item" style="height:auto;width:100%;padding:0px;"><div id="categoryBar"><ul class="categoryBar-list"><li class="categoryBar-list-item" style="background:url(https://cdn.cbd.int/akilar-candyassets@1.0.36/image/cover1.webp);"> <a class="categoryBar-list-link" href="categories/编程基础/">编程基础</a><span class="categoryBar-list-count">12</span><span class="categoryBar-list-descr">博客日志</span></li><li class="categoryBar-list-item" style="background:url(https://cdn.cbd.int/akilar-candyassets@1.0.36/image/cover2.webp);"> <a class="categoryBar-list-link" href="categories/博客/">博客</a><span class="categoryBar-list-count">2</span><span class="categoryBar-list-descr">一砖一瓦</span></li><li class="categoryBar-list-item" style="background:url(https://cdn.cbd.int/akilar-candyassets@1.0.36/image/cover3.webp);"> <a class="categoryBar-list-link" href="categories/SQL/">SQL</a><span class="categoryBar-list-count">1</span><span class="categoryBar-list-descr">生活欢乐多</span></li><li class="categoryBar-list-item" style="background:url(https://cdn.cbd.int/akilar-candyassets@1.0.36/image/cover4.webp);"> <a class="categoryBar-list-link" href="categories/文章推荐/">文章推荐</a><span class="categoryBar-list-count">1</span><span class="categoryBar-list-descr"></span></li><li class="categoryBar-list-item" style="background:url(https://cdn.cbd.int/akilar-candyassets@1.0.36/image/cover5.webp);"> <a class="categoryBar-list-link" href="categories/算法/">算法</a><span class="categoryBar-list-count">1</span><span class="categoryBar-list-descr"></span></li><li class="categoryBar-list-item" style="background:url(https://cdn.cbd.int/akilar-candyassets@1.0.36/image/cover6.webp);"> <a class="categoryBar-list-link" href="categories/游戏/">游戏</a><span class="categoryBar-list-count">1</span><span class="categoryBar-list-descr"></span></li></ul></div></div>';
+      console.log('已挂载butterfly_categories_card')
+      parent_div_git.insertAdjacentHTML("afterbegin",item_html)
+      }
+    if( document.getElementById('recent-posts') && (location.pathname ==='/'|| '/' ==='all')){
+    butterfly_categories_card_injector_config()
+    }
+  </script><script data-pjax>
+  function butterfly_footer_beautify_injector_config(){
+    var parent_div_git = document.getElementById('footer-wrap');
+    var item_html = '<div id="workboard"></div><p id="ghbdages"><a class="github-badge" target="_blank" href="https://hexo.io/" style="margin-inline:5px" data-title="博客框架为Hexo_v5.4.0" title=""><img src="https://img.shields.io/badge/Frame-Hexo-blue?style=flat&amp;logo=hexo" alt=""/></a><a class="github-badge" target="_blank" href="https://butterfly.js.org/" style="margin-inline:5px" data-title="主题版本Butterfly_v4.2.2" title=""><img src="https://img.shields.io/badge/Theme-Butterfly-6513df?style=flat&amp;logo=bitdefender" alt=""/></a><a class="github-badge" target="_blank" href="https://www.jsdelivr.com/" style="margin-inline:5px" data-title="本站使用JsDelivr为静态资源提供CDN加速" title=""><img src="https://img.shields.io/badge/CDN-jsDelivr-orange?style=flat&amp;logo=jsDelivr" alt=""/></a><a class="github-badge" target="_blank" href="https://github.com/" style="margin-inline:5px" data-title="本站项目由Github托管" title=""><img src="https://img.shields.io/badge/Source-Github-d021d6?style=flat&amp;logo=GitHub" alt=""/></a><a class="github-badge" target="_blank" href="http://creativecommons.org/licenses/by-nc-sa/4.0/" style="margin-inline:5px" data-title="本站采用知识共享署名-非商业性使用-相同方式共享4.0国际许可协议进行许可" title=""><img src="https://img.shields.io/badge/Copyright-BY--NC--SA%204.0-d42328?style=flat&amp;logo=Claris" alt=""/></a></p>';
+    console.log('已挂载butterfly_footer_beautify')
+    parent_div_git.insertAdjacentHTML("beforeend",item_html)
+    }
+  var elist = 'null'.split(',');
+  var cpage = location.pathname;
+  var epage = 'all';
+  var flag = 0;
+
+  for (var i=0;i<elist.length;i++){
+    if (cpage.includes(elist[i])){
+      flag++;
+    }
+  }
+
+  if ((epage ==='all')&&(flag == 0)){
+    butterfly_footer_beautify_injector_config();
+  }
+  else if (epage === cpage){
+    butterfly_footer_beautify_injector_config();
+  }
+  </script><script async src="/js/runtime/runtime.min.js"></script><script async src="/js/ali_font.js"></script><div class="js-pjax"><script async="async">var arr = document.getElementsByClassName('recent-post-item');
+for(var i = 0;i<arr.length;i++){
+    arr[i].classList.add('wow');
+    arr[i].classList.add('animate__zoomIn');
+    arr[i].setAttribute('data-wow-duration', '1.5s');
+    arr[i].setAttribute('data-wow-delay', '200ms');
+    arr[i].setAttribute('data-wow-offset', '30');
+    arr[i].setAttribute('data-wow-iteration', '1');
+  }</script><script async="async">var arr = document.getElementsByClassName('card-widget');
+for(var i = 0;i<arr.length;i++){
+    arr[i].classList.add('wow');
+    arr[i].classList.add('animate__zoomIn');
+    arr[i].setAttribute('data-wow-duration', '');
+    arr[i].setAttribute('data-wow-delay', '200ms');
+    arr[i].setAttribute('data-wow-offset', '');
+    arr[i].setAttribute('data-wow-iteration', '');
+  }</script><script async="async">var arr = document.getElementsByClassName('flink-list-card');
+for(var i = 0;i<arr.length;i++){
+    arr[i].classList.add('wow');
+    arr[i].classList.add('animate__flipInY');
+    arr[i].setAttribute('data-wow-duration', '3s');
+    arr[i].setAttribute('data-wow-delay', '');
+    arr[i].setAttribute('data-wow-offset', '');
+    arr[i].setAttribute('data-wow-iteration', '');
+  }</script><script async="async">var arr = document.getElementsByClassName('flink-list-card');
+for(var i = 0;i<arr.length;i++){
+    arr[i].classList.add('wow');
+    arr[i].classList.add('animate__animated');
+    arr[i].setAttribute('data-wow-duration', '3s');
+    arr[i].setAttribute('data-wow-delay', '');
+    arr[i].setAttribute('data-wow-offset', '');
+    arr[i].setAttribute('data-wow-iteration', '');
+  }</script><script async="async">var arr = document.getElementsByClassName('article-sort-item');
+for(var i = 0;i<arr.length;i++){
+    arr[i].classList.add('wow');
+    arr[i].classList.add('animate__slideInRight');
+    arr[i].setAttribute('data-wow-duration', '1.5s');
+    arr[i].setAttribute('data-wow-delay', '');
+    arr[i].setAttribute('data-wow-offset', '');
+    arr[i].setAttribute('data-wow-iteration', '');
+  }</script><script async="async">var arr = document.getElementsByClassName('site-card');
+for(var i = 0;i<arr.length;i++){
+    arr[i].classList.add('wow');
+    arr[i].classList.add('animate__flipInY');
+    arr[i].setAttribute('data-wow-duration', '3s');
+    arr[i].setAttribute('data-wow-delay', '');
+    arr[i].setAttribute('data-wow-offset', '');
+    arr[i].setAttribute('data-wow-iteration', '');
+  }</script><script async="async">var arr = document.getElementsByClassName('site-card');
+for(var i = 0;i<arr.length;i++){
+    arr[i].classList.add('wow');
+    arr[i].classList.add('animate__animated');
+    arr[i].setAttribute('data-wow-duration', '3s');
+    arr[i].setAttribute('data-wow-delay', '');
+    arr[i].setAttribute('data-wow-offset', '');
+    arr[i].setAttribute('data-wow-iteration', '');
+  }</script></div><script defer src="https://cdn.cbd.int/hexo-butterfly-wowjs/lib/wow.min.js"></script><script defer src="https://cdn.cbd.int/hexo-butterfly-wowjs/lib/wow_init.js"></script><script data-pjax src="https://registry.npmmirror.com/oh-my-live2d/latest/files"></script><script>const oml2d = OML2D.loadOml2d({libraryUrls:{"complete":"https://registry.npmmirror.com/oh-my-live2d/latest/files/lib/complete.js","cubism2":"https://registry.npmmirror.com/oh-my-live2d/latest/files/lib/cubism2.js","cubism5":"https://registry.npmmirror.com/oh-my-live2d/latest/files/lib/cubism5.js"},mobileDisplay:true,dockedPosition:"right",models:[{"path":"https://cdn.statically.io/gh/stack2005/live-2d-resource-bed/main/%E7%BA%B1%E9%9B%BElive2d/model/sagiri/sagiri.model.json","mobilePosition":[0,0],"mobileScale":0.1,"mobileStageStyle":{"width":180,"height":166},"motionPreloadStrategy":"IDLE","position":[30,0],"scale":0.13,"stageStyle":{"width":270,"height":200}},{"path":"https://cdn.statically.io/gh/stack2005/live-2d-resource-bed/main/%E5%8A%A0%E8%97%A4%E6%83%A0live2d/model/katou_01/katou_01.model.json","scale":0.12,"position":[-15,-120],"stageStyle":{"width":270,"height":270},"mobileScale":0.08,"mobilePosition":[0,0],"mobileStageStyle":{"width":180}},{"path":"https://cdn.statically.io/gh/stack2005/live-2d-resource-bed/main/abeikelongbi_3/abeikelongbi_3.model3.json","scale":0.05,"position":[-50,10],"mobileScale":0.08,"mobilePosition":[0,0],"mobileStageStyle":{"width":180},"stageStyle":{"width":270,"height":350}}],parentElement:document.body,primaryColor:"var(--btn-bg)",sayHello:false,tips:{style: {"width":230,"height":120,"left":"calc(50% - 20px)","top":"-100px"},mobileStyle: {"width":180,"height":80,"left":"calc(50% - 30px)","top":"-100px"},idleTips:{interval:15000,message:function(){
+  return axios.get('https://v1.hitokoto.cn?c=i')
+    .then(function (response) {
+      return response.data.hitokoto ;
+    })
+    .catch(function (error) {
+      console.error(error);
+    });
+}
+}}});</script><!-- hexo injector body_end end --></body></html>
