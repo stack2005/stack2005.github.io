@@ -4,6 +4,33 @@
   
     
     <entry>
+      <title>react学习</title>
+      <link href="/posts/128df006.html"/>
+      <url>/posts/128df006.html</url>
+      
+        <content type="html"><![CDATA[]]></content>
+      
+      
+      <categories>
+          
+          <category> 编程基础 </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> react </tag>
+            
+            <tag> 前端 </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>js学习</title>
       <link href="/posts/128df006.html"/>
       <url>/posts/128df006.html</url>
@@ -20,9 +47,9 @@
       
         <tags>
             
-            <tag> js </tag>
-            
             <tag> 前端 </tag>
+            
+            <tag> js </tag>
             
         </tags>
       
